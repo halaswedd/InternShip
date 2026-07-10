@@ -1,4 +1,7 @@
 <?php
+require 'vendor/autoload.php';
+use Firebase\JWT\JWT;
+
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST");
@@ -43,9 +46,23 @@ if (!password_verify($password, $user['password_hash'])) {
     exit;
 }
 
+$secret_key = "this_is_a_much_longer_secret_key_for_jwt_2026_it_helpdesk_project";
+$issued_at = time();
+$expiration_time = $issued_at + 3600; // صالح لمدة ساعة
+
+$payload = [
+    "iat" => $issued_at,
+    "exp" => $expiration_time,
+    "user_id" => $user['id'],
+    "role_id" => $user['role_id']
+];
+
+$jwt = JWT::encode($payload, $secret_key, 'HS256');
+
 echo json_encode([
     "success" => true,
     "message" => "Login successful",
+    "token" => $jwt,
     "user" => [
         "id" => $user['id'],
         "name" => $user['name'],
@@ -53,7 +70,6 @@ echo json_encode([
         "role_id" => $user['role_id']
     ]
 ]);
-
 $stmt->close();
 $conn->close();
 ?>

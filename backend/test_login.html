@@ -8,7 +8,7 @@
     <input type="email" id="email" placeholder="Email"><br><br>
     <input type="password" id="password" placeholder="Password"><br><br>
     <button onclick="testLogin()">Login</button>
-    <p id="result"></p>
+    <pre id="result" style="white-space: pre-wrap; background:#f4f4f4; padding:10px;"></pre>
 
     <script>
         function testLogin() {
@@ -20,9 +20,9 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
             })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('result').innerText = JSON.stringify(data);
+            .then(res => res.text())
+            .then(text => {
+                document.getElementById('result').innerText = text;
             })
             .catch(err => {
                 document.getElementById('result').innerText = "Error: " + err;
