@@ -30,7 +30,6 @@ if (!password_verify($password, $user['password_hash'])) {
     exit;
 }
 
-$secret_key = "this_is_a_much_longer_secret_key_for_jwt_2026_it_helpdesk_project";
 $issued_at = time();
 $expiration_time = $issued_at + 3600; // صالح لمدة ساعة
 
