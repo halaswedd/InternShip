@@ -63,7 +63,7 @@ function TicketList() {
         <tbody>
           {tickets.map((ticket) => (
             <tr key={ticket.id}>
-              <td>{ticket.reference_no}</td>
+              <td><Link to={`/tickets/${ticket.id}`}>{ticket.reference_no}</Link></td>
               <td>{ticket.title}</td>
               <td>{ticket.category}</td>
               <td>{ticket.priority}</td>

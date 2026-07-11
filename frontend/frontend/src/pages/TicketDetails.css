@@ -1,0 +1,83 @@
+.ticket-details-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
+
+.ticket-details-container h2 {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.ticket-details-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-details-container label {
+  margin-top: 12px;
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.ticket-details-container input,
+.ticket-details-container textarea,
+.ticket-details-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+}
+
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.save-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.save-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.delete-btn {
+  flex: 1;
+  padding: 10px;
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #b91c1c;
+}

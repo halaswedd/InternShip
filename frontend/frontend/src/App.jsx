@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import CreateTicket from "./pages/CreateTicket";
 import TicketList from "./pages/TicketList";
+import TicketDetails from "./pages/TicketDetails";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
         element={
           <ProtectedRoute>
             <TicketList />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tickets/:id"
+        element={
+          <ProtectedRoute>
+            <TicketDetails />
           </ProtectedRoute>
         }
       />
