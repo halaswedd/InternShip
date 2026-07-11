@@ -3,6 +3,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import CreateTicket from "./pages/CreateTicket";
+import TicketList from "./pages/TicketList";
 
 function App() {
   return (
@@ -15,6 +17,22 @@ function App() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/create-ticket"
+        element={
+          <ProtectedRoute>
+            <CreateTicket />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tickets"
+        element={
+          <ProtectedRoute>
+            <TicketList />
           </ProtectedRoute>
         }
       />

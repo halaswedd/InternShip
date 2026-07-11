@@ -1,0 +1,45 @@
+.create-ticket-container {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.create-ticket-container h2 {
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.create-ticket-container input,
+.create-ticket-container textarea,
+.create-ticket-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 14px;
+}
+
+.create-ticket-container label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.create-ticket-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.create-ticket-container button:hover {
+  background-color: var(--primary-dark);
+}
