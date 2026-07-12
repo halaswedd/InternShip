@@ -28,9 +28,10 @@ function Login() {
       } else {
         setError(data.message);
       }
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
-    }
+    }  catch (err) {
+  console.error(err);
+  setError("Something went wrong. Please try again.");
+}
   };
 
   return (

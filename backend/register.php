@@ -1,5 +1,6 @@
 <?php
-require 'config.php';
+require_once "config.php";
+require_once "auth_middleware.php";
 
 $data = json_decode(file_get_contents("php://input"), true);
 

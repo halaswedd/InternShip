@@ -1,4 +1,6 @@
 <?php
+require_once "config.php";
+require_once "auth_middleware.php";
 header("Content-Type: application/json");
 echo json_encode([
     "getallheaders" => function_exists('getallheaders') ? getallheaders() : "not available",

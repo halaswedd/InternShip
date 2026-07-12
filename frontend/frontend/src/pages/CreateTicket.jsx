@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateTicket.css";
 
@@ -41,9 +41,10 @@ function CreateTicket() {
       } else {
         setError(data.message);
       }
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
-    }
+    }  catch (err) {
+  console.error(err);
+  setError("Something went wrong. Please try again.");
+}
   };
 
   return (
