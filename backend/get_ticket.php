@@ -1,6 +1,6 @@
 <?php
-require 'config.php';
-require 'auth_middleware.php';
+require_once "config.php";
+require_once "auth_middleware.php";
 
 $user = authenticate();
 

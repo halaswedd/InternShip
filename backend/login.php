@@ -1,7 +1,8 @@
 <?php
-require 'vendor/autoload.php';
+
+require_once 'vendor/autoload.php';
 use Firebase\JWT\JWT;
-require 'config.php';
+require_once 'config.php';
 
 $data = json_decode(file_get_contents("php://input"), true);
 

@@ -1,14 +1,6 @@
 <?php
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "it_helpdesk";
+require_once "db.php";
 
-$conn = new mysqli($host, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($conn) {
+    echo "Database connected successfully!";
 }
-
-echo "Connected successfully to the database!";
-?>
