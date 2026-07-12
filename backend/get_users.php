@@ -12,7 +12,7 @@ if ($user->role_id != 1) {
 }
 
 $stmt = $conn->prepare("
-    SELECT u.id, u.name, u.email, u.created_at, r.name AS role
+    SELECT u.id, u.name, u.email, u.created_at, u.role_id, r.name AS role
     FROM users u
     JOIN roles r ON u.role_id = r.id
     ORDER BY u.created_at DESC

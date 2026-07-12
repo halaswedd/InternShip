@@ -67,3 +67,24 @@ th {
   background: #dcfce7;
   color: #166534;
 }
+
+select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  color: var(--text);
+  background-color: var(--surface);
+  cursor: pointer;
+  outline: none;
+  min-width: 160px;
+}
+
+select:hover {
+  border-color: var(--primary);
+}
+
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
