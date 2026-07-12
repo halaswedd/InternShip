@@ -62,6 +62,7 @@ function Dashboard() {
       <div className="dashboard-links">
         <Link to="/create-ticket">+ Create New Ticket</Link>
         <Link to="/tickets">View All Tickets</Link>
+        <Link to="/admin">Admin Panel</Link>
       </div>
 
       {loading && <p>Loading stats...</p>}

@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CreateTicket from "./pages/CreateTicket";
 import TicketList from "./pages/TicketList";
 import TicketDetails from "./pages/TicketDetails";
+import AdminPanel from "./pages/AdminPanel";
 
 function App() {
   return (
@@ -42,6 +43,14 @@ function App() {
         element={
           <ProtectedRoute>
             <TicketDetails />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoute>
+            <AdminPanel />
           </ProtectedRoute>
         }
       />
