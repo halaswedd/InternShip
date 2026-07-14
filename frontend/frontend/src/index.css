@@ -31,3 +31,7 @@ body {
 input, button {
   font-family: inherit;
 }
+
+html {
+  scroll-behavior: smooth;
+}
