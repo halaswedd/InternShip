@@ -7,11 +7,12 @@ import CreateTicket from "./pages/CreateTicket";
 import TicketList from "./pages/TicketList";
 import TicketDetails from "./pages/TicketDetails";
 import AdminPanel from "./pages/AdminPanel";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
