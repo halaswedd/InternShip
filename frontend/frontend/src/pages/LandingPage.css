@@ -1,0 +1,61 @@
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--primary-light), var(--bg));
+}
+
+.landing-content {
+  text-align: center;
+  padding: 40px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  max-width: 450px;
+}
+
+.landing-content h1 {
+  color: var(--primary-dark);
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.landing-content p {
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.landing-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.landing-btn {
+  padding: 10px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.landing-btn.primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.landing-btn.primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.landing-btn.secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.landing-btn.secondary:hover {
+  background-color: var(--primary-light);
+}
