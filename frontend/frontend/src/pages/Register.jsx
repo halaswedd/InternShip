@@ -6,6 +6,8 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -14,6 +16,16 @@ function Register() {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    if (!agreed) {
+      setError("Please agree to the Terms and Conditions.");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost/InternShip/backend/register.php", {
@@ -36,38 +48,88 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <br /><br />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <br /><br />
-        <button type="submit">Register</button>
-      </form>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <p>Already have an account? <Link to="/login">Login</Link></p>
+    <div className="register-page">
+      <div className="register-page-content">
+        <div className="register-card">
+          <h2>Get Started Now</h2>
+
+          <form onSubmit={handleRegister}>
+            <label>Full Name</label>
+            <input
+              type="text"
+              placeholder="Enter your full name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <div className="password-row">
+              <div className="password-field">
+                <label>Password</label>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="password-field">
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  placeholder="••••••••"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <label className="agree-terms">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+              />
+              <span>
+                I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.
+              </span>
+            </label>
+
+            <button type="submit" className="register-btn">Register</button>
+          </form>
+
+          {error && <p className="register-error">{error}</p>}
+          {success && <p className="register-success">{success}</p>}
+
+          <p className="signin-link">
+            Already have an account? <Link to="/login">Sign in</Link>
+          </p>
+        </div>
+      </div>
+
+      <footer className="register-footer">
+        <div className="lp-footer-left">
+          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
+          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+        </div>
+        <div className="lp-footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+          <a href="#">Security</a>
+        </div>
+      </footer>
     </div>
   );
 }
