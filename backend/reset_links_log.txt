@@ -1,0 +1,1 @@
+[2026-07-15 18:41:54] Reset Link for houraniabs@gmail.com: http://localhost:3000/reset-password?token=85f50dd974731cd86c896e3ffb4db727c12cbd43fe7e730591b75f74f3344081
