@@ -7,20 +7,25 @@ function LandingPage() {
       <nav className="lp-nav">
         <div className="lp-logo">IT<span>HelpDesk</span></div>
         <div className="lp-nav-links">
-          <a href="#features">Features</a>
-          <a href="#stats">About</a>
+          <a href="#" className="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#tickets">Tickets</a>
+          <a href="#support">Support</a>
         </div>
-        <Link to="/login" className="lp-nav-btn">Sign In</Link>
+        <div className="lp-nav-actions">
+          <Link to="/login" className="lp-signin">Sign in →</Link>
+          <Link to="/register" className="lp-getstarted">Get Started</Link>
+        </div>
       </nav>
 
       <section className="lp-hero">
         <div className="lp-hero-text">
-          <h1>Solve IT issues <span>faster</span>, all in one place</h1>
-          <p>Submit support tickets, track their status, and get help from your IT team — quickly and transparently.</p>
-          <div className="lp-hero-buttons">
-            <Link to="/register" className="lp-btn primary">Get Started</Link>
-            <Link to="/login" className="lp-btn secondary">Login</Link>
-          </div>
+          <h1>Solve IT Issues <span>Faster</span>, All in One Place</h1>
+          <p>
+            Submit support requests, track ticket status, and get help from your
+            IT team quickly and easily. Experience systemic order in technical
+            troubleshooting.
+          </p>
         </div>
         <div className="lp-hero-visual">
           <div className="lp-visual-card">
@@ -43,58 +48,74 @@ function LandingPage() {
         </div>
       </section>
 
-      <section className="lp-features" id="features">
+      <section className="lp-features" id="about">
         <div className="lp-features-box">
-          <h2>What makes HelpDesk work</h2>
+          <h2>What Makes HelpDesk Special?</h2>
+          <p className="lp-features-subtitle">
+            Everything you need to manage technical incidents and service requests.
+          </p>
           <div className="lp-features-grid">
             <div className="lp-feature-card">
-              <div className="lp-feature-icon">✓</div>
+              <div className="lp-feature-icon">📋</div>
               <h3>Create Tickets</h3>
-              <p>Submit a request in seconds — pick a category and priority, and you're done.</p>
+              <p>Report your technical problems easily with our intuitive forms and category tagging.</p>
             </div>
             <div className="lp-feature-card">
               <div className="lp-feature-icon">⚡</div>
-              <h3>Fast Response</h3>
-              <p>Tickets route straight to the right support agent, so nothing sits unseen.</p>
+              <h3>Fast Support</h3>
+              <p>Get solutions from IT specialists within minutes through our automated routing system.</p>
             </div>
             <div className="lp-feature-card">
-              <div className="lp-feature-icon">📊</div>
+              <div className="lp-feature-icon">📈</div>
               <h3>Track Progress</h3>
-              <p>Follow every ticket from Open to Resolved, with a full history of updates.</p>
+              <p>Follow your ticket status anytime with real-time updates and notification alerts.</p>
             </div>
             <div className="lp-feature-card">
               <div className="lp-feature-icon">🔒</div>
-              <h3>Secure Access</h3>
-              <p>Role-based permissions keep every ticket visible only to the right people.</p>
+              <h3>Secure System</h3>
+              <p>Access data securely based on your organizational role with enterprise encryption.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="lp-stats" id="stats">
+      <section className="lp-stats" id="tickets">
         <div className="lp-stat">
           <span className="lp-stat-number">99.8%</span>
-          <span className="lp-stat-label">Uptime</span>
+          <span className="lp-stat-label">UPTIME RELIABILITY</span>
         </div>
         <div className="lp-stat">
           <span className="lp-stat-number">15 min</span>
-          <span className="lp-stat-label">Avg. first response</span>
+          <span className="lp-stat-label">AVG. RESPONSE TIME</span>
         </div>
         <div className="lp-stat">
           <span className="lp-stat-number">1.2k+</span>
-          <span className="lp-stat-label">Tickets resolved</span>
+          <span className="lp-stat-label">TICKETS RESOLVED DAILY</span>
         </div>
       </section>
 
-      <section className="lp-cta">
+      <section className="lp-cta" id="support">
         <h2>Ready to streamline your IT operations?</h2>
-        <p>Create an account and submit your first ticket in under a minute.</p>
-        <Link to="/register" className="lp-btn white">Get Started</Link>
+        <p>Join thousands of teams who have transformed their technical support workflow into a seamless experience.</p>
+        <Link to="/register" className="lp-btn white">Get Started Free</Link>
       </section>
 
       <footer className="lp-footer">
-        <span>IT HelpDesk</span>
-        <span>Internal support system</span>
+        <div className="lp-footer-left">
+          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
+          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+        </div>
+        <div className="lp-footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+          <a href="#">Security</a>
+        </div>
+        <div className="lp-footer-social">
+          <span>𝕏</span>
+          <span>in</span>
+          <span>◎</span>
+        </div>
       </footer>
     </div>
   );
