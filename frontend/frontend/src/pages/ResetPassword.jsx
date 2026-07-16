@@ -32,7 +32,7 @@ const ResetPassword = () => {
 
     try {
       // Replace with your actual backend URL
-      const response = await fetch("http://localhost:8080/InternShip/backend/reset_password.php", {
+      const response = await fetch("http://localhost/InternShip/backend/reset_password.php", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, password }),
