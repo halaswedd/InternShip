@@ -15,7 +15,7 @@ function ForgotPassword() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/InternShip/backend/forgot_password.php", {
+      const response = await fetch("http://localhost/InternShip/backend/forgot_password.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
