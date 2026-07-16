@@ -3,3 +3,4 @@
 [2026-07-16 14:39:22] Reset Link for houraniabs@gmail.com: http://localhost:3000/reset-password?token=6f3618daed69e659f827b81a84b7dd074dc876b738eabb05e974d2ed0832a268
 [2026-07-16 14:42:08] Reset Link for houraniabs@gmail.com: http://localhost:3000/reset-password?token=d964ae04e3e9585e160c9bf42fca68ed6ec1bcd866f265d6712f9615e458e847
 [2026-07-16 14:42:52] Reset Link for houraniabs@gmail.com: http://localhost:3000/reset-password?token=b8034990e029694673ed67fd74d43152bcaf8259e9b05308b15eeb75811b635f
+[2026-07-16 15:45:27] Reset Link for halaswed0@gmail.com: http://localhost:3000/reset-password?token=679472c995c023f5242903b5b540fd22956e610316010f1c2ecac7ba8aaf32f1
