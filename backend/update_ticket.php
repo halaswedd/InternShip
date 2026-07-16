@@ -18,7 +18,7 @@ if (empty($ticket_id)) {
     exit;
 }
 
-// أول شي، منجيب التذكرة نتأكد مين فتحها ومين معينلها
+
 $check = $conn->prepare("SELECT created_by, assigned_to FROM tickets WHERE id = ?");
 $check->bind_param("i", $ticket_id);
 $check->execute();
@@ -31,7 +31,7 @@ if ($result->num_rows === 0) {
 
 $ticket = $result->fetch_assoc();
 
-// صلاحيات: بس صاحب التذكرة، أو المعين إلها، أو أي دور غير Employee (3) يقدر يعدل
+
 $is_owner = $ticket['created_by'] == $user->user_id;
 $is_assigned = $ticket['assigned_to'] == $user->user_id;
 $is_staff = $user->role_id != 3;

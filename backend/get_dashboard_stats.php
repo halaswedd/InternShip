@@ -6,8 +6,6 @@ $user = authenticate();
 $role_id = $user->role_id;
 $user_id = $user->user_id;
 
-
-// عدد التذاكر حسب كل حالة (Open, In Progress, Pending, Resolved, Closed)
 $sql = "
     SELECT s.name AS status, COUNT(t.id) AS count
     FROM statuses s
@@ -28,7 +26,7 @@ while ($row = $result->fetch_assoc()) {
     $status_counts[$row['status']] = (int)$row['count'];
 }
 
-// عدد التذاكر حسب الفئة (Category)
+
 $sql2 = "
     SELECT c.name AS category, COUNT(t.id) AS count
     FROM categories c

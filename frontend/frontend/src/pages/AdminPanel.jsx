@@ -52,7 +52,7 @@ function AdminPanel() {
 
       if (data.success) {
         setSuccess("Role updated!");
-        fetchUsers(); // نرجع نجيب اللستة المحدثة
+        fetchUsers(); 
       } else {
         setError(data.message);
       }

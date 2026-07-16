@@ -4,7 +4,6 @@ require 'auth_middleware.php';
 
 $user = authenticate();
 
-// بس Admin (role_id = 1) مسموحلو يشوف هالصفحة
 if ($user->role_id != 1) {
     http_response_code(403);
     echo json_encode(["success" => false, "message" => "Admin access only"]);

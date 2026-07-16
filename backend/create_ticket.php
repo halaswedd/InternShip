@@ -2,7 +2,7 @@
 require_once "config.php";
 require_once "auth_middleware.php";
 
-$user = authenticate(); // إذا الـ token غلط، بتوقف هون تلقائيا
+$user = authenticate(); 
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -16,11 +16,11 @@ if (empty($title) || empty($category_id) || empty($priority_id)) {
     exit;
 }
 
-// توليد رقم مرجعي فريد للتذكرة، مثلا: TKT-2026-0001
+
 $reference_no = "TKT-" . date("Y") . "-" . strtoupper(substr(uniqid(), -6));
 
-$status_id = 1; // 1 = Open افتراضيا (أول حالة بجدول statuses)
-$created_by = $user->user_id; // جاي من الـ token مباشرة، مش من React!
+$status_id = 1;
+$created_by = $user->user_id; 
 
 $stmt = $conn->prepare("INSERT INTO tickets (reference_no, title, description, category_id, priority_id, status_id, created_by) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $stmt->bind_param("sssiiii", $reference_no, $title, $description, $category_id, $priority_id, $status_id, $created_by);

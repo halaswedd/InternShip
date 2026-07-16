@@ -7,8 +7,6 @@ $user = authenticate();
 $user_id = $user->user_id;
 $role_id = $user->role_id;
 
-// إذا Employee (role_id = 3)، بيشوف بس تذاكره هو
-// أي دور تاني (Admin, IT Agent, Manager)، بيشوف كل التذاكر
 if ($role_id == 3) {
     $stmt = $conn->prepare("
         SELECT t.id, t.reference_no, t.title, t.description, 
