@@ -23,7 +23,7 @@ if (empty($token) || empty($new_password)) {
     exit;
 }
 
-// 1. Validate token & check expiration
+
 $stmt = $conn->prepare("SELECT id, reset_token_expires_at FROM users WHERE reset_token = ?");
 $stmt->bind_param("s", $token);
 $stmt->execute();
@@ -44,7 +44,6 @@ if ($user['reset_token_expires_at'] < $current_time) {
     exit;
 }
 
-// 2. Hash new password and clear the token from the database
 $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
 $update = $conn->prepare("UPDATE users SET password_hash = ?, reset_token = NULL, reset_token_expires_at = NULL WHERE id = ?");
 $update->bind_param("si", $hashed_password, $user['id']);

@@ -1,65 +1,89 @@
-import { useState, } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import "./ForgotPassword.css";
 
-const ForgotPassword = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
-    setError('');
+    setMessage("");
+    setError("");
 
     try {
-      // Replace with your actual backend URL
-      const response = await fetch("http://localhost:8080/InternShip/backend/forgot_password.php", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost/InternShip/backend/forgot_password.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
       if (data.success) {
         setMessage(data.message);
-        setEmail('');
+        setEmail("");
       } else {
         setError(data.message);
       }
     } catch (err) {
-  console.error(err);
-  setError(err.message || "Something went wrong. Please try again.");
-} finally {
+      setError("Something went wrong. Please try again.");
+    } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
-      <h2>Forgot Password</h2>
-      <p>Enter your email to receive a secure password reset link.</p>
-      
-      {message && <p style={{ color: 'green' }}>{message}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="forgot-page">
+      <div className="forgot-page-content">
+        <div className="forgot-card">
+          <h2>Reset Your Password</h2>
+          <p className="forgot-subtitle">
+            Enter your email address below and we'll send you a link to reset your password.
+          </p>
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px' }}>
-          <label>Email Address:</label>
-          <input 
-            type="email" 
-            value={email} 
-            onChange={(e) => setEmail(e.target.value)} 
-            required 
-            style={{ width: '100%', padding: '8px', marginTop: '5px' }}
-          />
+          <form onSubmit={handleSubmit}>
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+
+            <button type="submit" className="forgot-btn" disabled={loading}>
+              {loading ? "Sending..." : "Send Reset Link →"}
+            </button>
+          </form>
+
+          {message && <p className="forgot-success">{message}</p>}
+          {error && <p className="forgot-error">{error}</p>}
+
+          <div className="forgot-divider"></div>
+
+          <p className="back-link">
+            Remembered your password? <Link to="/login">Back to Login</Link>
+          </p>
         </div>
-        <button type="submit" disabled={loading} style={{ width: '100%', padding: '10px', background: '#007bff', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-          {loading ? 'Sending...' : 'Send Reset Link'}
-        </button>
-      </form>
+      </div>
+
+      <footer className="forgot-footer">
+        <div className="lp-footer-left">
+          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
+          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+        </div>
+        <div className="lp-footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+          <a href="#">Security</a>
+        </div>
+      </footer>
     </div>
   );
-};
+}
 
 export default ForgotPassword;

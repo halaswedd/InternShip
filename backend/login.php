@@ -32,7 +32,7 @@ if (!password_verify($password, $user['password_hash'])) {
 }
 
 $issued_at = time();
-$expiration_time = $issued_at + 3600; // صالح لمدة ساعة
+$expiration_time = $issued_at + 3600;
 
 $payload = [
     "iat" => $issued_at,

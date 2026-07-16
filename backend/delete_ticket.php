@@ -24,7 +24,7 @@ if ($result->num_rows === 0) {
 
 $ticket = $result->fetch_assoc();
 
-// بس صاحب التذكرة أو دور غير Employee يقدر يحذف
+
 $is_owner = $ticket['created_by'] == $user->user_id;
 $is_staff = $user->role_id != 3;
 

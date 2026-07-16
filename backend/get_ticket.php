@@ -33,7 +33,7 @@ if ($result->num_rows === 0) {
 
 $ticket = $result->fetch_assoc();
 
-// نفس منطق الصلاحيات: بس صاحبها، المعين إلها، أو staff يقدر يشوفها
+
 $is_owner = $ticket['created_by'] == $user->user_id;
 $is_assigned = $ticket['assigned_to'] == $user->user_id;
 $is_staff = $user->role_id != 3;

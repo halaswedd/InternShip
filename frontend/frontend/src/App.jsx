@@ -8,16 +8,12 @@ import TicketList from "./pages/TicketList";
 import TicketDetails from "./pages/TicketDetails";
 import AdminPanel from "./pages/AdminPanel";
 import LandingPage from "./pages/LandingPage";
-
-// 1. Import your new Forgot and Reset password pages
-// (Double-check the paths to match where you saved these files!)
 import ForgotPassword from "./pages/ForgotPassword"; 
 import ResetPassword from "./pages/ResetPassword"; 
 
 function App() {
   return (
     <Routes>
-      {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -26,7 +22,6 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/reset-password" element={<ResetPassword />} />
 
-      {/* Protected Routes */}
       <Route
         path="/dashboard"
         element={
