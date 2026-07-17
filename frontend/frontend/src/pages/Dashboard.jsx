@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
 import "./Dashboard.css";
 
 function Dashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
-  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -53,49 +47,50 @@ function Dashboard() {
   };
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h2>Welcome, {user?.name}!</h2>
-        <button onClick={handleLogout} className="logout-btn">Logout</button>
-      </div>
-
-      <div className="dashboard-links">
-        <Link to="/create-ticket">+ Create New Ticket</Link>
-        <Link to="/tickets">View All Tickets</Link>
-        <Link to="/admin">Admin Panel</Link>
-      </div>
-
-      {loading && <p>Loading stats...</p>}
-
-      {stats && (
-        <div className="stats-section">
-          <div className="widgets-row">
-            <div className="widget">
-              <span className="widget-number">{stats.by_status["Open"] || 0}</span>
-              <span className="widget-label">Open</span>
-            </div>
-            <div className="widget">
-              <span className="widget-number">{stats.by_status["In Progress"] || 0}</span>
-              <span className="widget-label">In Progress</span>
-            </div>
-            <div className="widget">
-              <span className="widget-number">{stats.by_status["Resolved"] || 0}</span>
-              <span className="widget-label">Resolved</span>
-            </div>
-            <div className="widget">
-              <span className="widget-number">{stats.by_status["Pending"] || 0}</span>
-              <span className="widget-label">Pending</span>
-            </div>
-          </div>
-
-          <h3>Tickets by Category</h3>
-          <div className="bar-chart">{renderBars(stats.by_category)}</div>
-
-          <h3>Tickets by Status</h3>
-          <div className="bar-chart">{renderBars(stats.by_status)}</div>
+    <>
+      <Navbar />
+      <div className="dashboard-container">
+        <div className="dashboard-header">
+          <h2>Welcome, {user?.name}!</h2>
         </div>
-      )}
-    </div>
+
+        <div className="dashboard-links">
+          <Link to="/create-ticket">+ Create New Ticket</Link>
+          <Link to="/tickets">View All Tickets</Link>
+        </div>
+
+        {loading && <p>Loading stats...</p>}
+
+        {stats && (
+          <div className="stats-section">
+            <div className="widgets-row">
+              <div className="widget">
+                <span className="widget-number">{stats.by_status["Open"] || 0}</span>
+                <span className="widget-label">Open</span>
+              </div>
+              <div className="widget">
+                <span className="widget-number">{stats.by_status["In Progress"] || 0}</span>
+                <span className="widget-label">In Progress</span>
+              </div>
+              <div className="widget">
+                <span className="widget-number">{stats.by_status["Resolved"] || 0}</span>
+                <span className="widget-label">Resolved</span>
+              </div>
+              <div className="widget">
+                <span className="widget-number">{stats.by_status["Pending"] || 0}</span>
+                <span className="widget-label">Pending</span>
+              </div>
+            </div>
+
+            <h3>Tickets by Category</h3>
+            <div className="bar-chart">{renderBars(stats.by_category)}</div>
+
+            <h3>Tickets by Status</h3>
+            <div className="bar-chart">{renderBars(stats.by_status)}</div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -10,6 +10,8 @@ import AdminPanel from "./pages/AdminPanel";
 import LandingPage from "./pages/LandingPage";
 import ForgotPassword from "./pages/ForgotPassword"; 
 import ResetPassword from "./pages/ResetPassword"; 
+import Notifications from "./pages/Notifications";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -62,7 +64,25 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/notifications"
+        element={
+          <ProtectedRoute>
+            <Notifications />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
+    
+    
   );
 }
 

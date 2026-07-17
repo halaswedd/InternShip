@@ -7,6 +7,7 @@ $user = authenticate();
 $user_id = $user->user_id;
 $role_id = $user->role_id;
 
+
 if ($role_id == 3) {
     $stmt = $conn->prepare("
         SELECT t.id, t.reference_no, t.title, t.description, 
@@ -22,13 +23,14 @@ if ($role_id == 3) {
     $stmt->bind_param("i", $user_id);
 } else {
     $stmt = $conn->prepare("
-        SELECT t.id, t.reference_no, t.title, t.description, 
-               c.name AS category, p.name AS priority, s.name AS status,
-               t.created_at, t.assigned_to
+       SELECT t.id, t.reference_no, t.title, t.description, 
+       c.name AS category, p.name AS priority, s.name AS status,
+       t.created_at, t.assigned_to, u.name AS requested_by
         FROM tickets t
         JOIN categories c ON t.category_id = c.id
         JOIN priorities p ON t.priority_id = p.id
         JOIN statuses s ON t.status_id = s.id
+        JOIN users u ON t.created_by = u.id
         ORDER BY t.created_at DESC
     ");
 }
