@@ -3,11 +3,18 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import "./CreateTicket.css";
 
+const priorities = [
+  { id: "1", label: "Low" },
+  { id: "2", label: "Medium" },
+  { id: "3", label: "High" },
+  { id: "4", label: "Urgent" },
+];
+
 function CreateTicket() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [categoryId, setCategoryId] = useState("1");
-  const [priorityId, setPriorityId] = useState("2");
+  const [categoryId, setCategoryId] = useState("");
+  const [priorityId, setPriorityId] = useState("1");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
@@ -16,6 +23,11 @@ function CreateTicket() {
     e.preventDefault();
     setError("");
     setSuccess("");
+
+    if (!categoryId) {
+      setError("Please select a category.");
+      return;
+    }
 
     const token = localStorage.getItem("token");
 
@@ -50,50 +62,92 @@ function CreateTicket() {
   return (
     <>
       <Navbar />
-      <div className="create-ticket-container">
-        <h2>Create New Ticket</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <br /><br />
-          <textarea
-            placeholder="Description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows="4"
-          />
-          <br /><br />
+      <div className="ct-page">
+        <div className="ct-card">
+          <h2>Create New Ticket</h2>
+          <p className="ct-subtitle">Describe your issue in detail and we'll get a technician on it immediately.</p>
 
-          <label>Category:</label>
-          <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
-            <option value="1">Hardware</option>
-            <option value="2">Software</option>
-            <option value="3">Network</option>
-            <option value="4">Email</option>
-            <option value="5">Access Request</option>
-            <option value="6">Other</option>
-          </select>
-          <br /><br />
+          <form onSubmit={handleSubmit}>
+            <label>Ticket Subject</label>
+            <input
+              type="text"
+              placeholder="Brief summary of the issue (e.g., Cannot connect)"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
 
-          <label>Priority:</label>
-          <select value={priorityId} onChange={(e) => setPriorityId(e.target.value)}>
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-            <option value="4">Critical</option>
-          </select>
-          <br /><br />
+            <div className="ct-row">
+              <div className="ct-field">
+                <label>Problem Category</label>
+                <select value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
+                  <option value="">Select category</option>
+                  <option value="1">Hardware</option>
+                  <option value="2">Software</option>
+                  <option value="3">Network</option>
+                  <option value="4">Email</option>
+                  <option value="5">Access Request</option>
+                  <option value="6">Other</option>
+                </select>
+              </div>
 
-          <button type="submit">Create Ticket</button>
-        </form>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {success && <p style={{ color: "green" }}>{success}</p>}
+              <div className="ct-field">
+                <label>Priority Level</label>
+                <div className="ct-priority-pills">
+                  {priorities.map((p) => (
+                    <button
+                      type="button"
+                      key={p.id}
+                      className={`ct-pill ${priorityId === p.id ? "active" : ""}`}
+                      onClick={() => setPriorityId(p.id)}
+                    >
+                      {p.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <label>Detailed Description</label>
+            <textarea
+              placeholder="Include as much detail as possible:"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="5"
+            />
+
+            <label>Attachments</label>
+            <div className="ct-dropzone">
+              <span className="ct-dropzone-icon">☁️</span>
+              <p>Drag & drop files or <span className="ct-browse">browse</span></p>
+              <span className="ct-dropzone-hint">Max file size: 10MB (PDF, PNG, JPG)</span>
+            </div>
+
+            <div className="ct-divider"></div>
+
+            <div className="ct-actions">
+              <button type="button" className="ct-cancel" onClick={() => navigate("/tickets")}>Cancel</button>
+              <button type="submit" className="ct-submit">Submit Ticket →</button>
+            </div>
+          </form>
+
+          {error && <p className="ct-error">{error}</p>}
+          {success && <p className="ct-success">{success}</p>}
+        </div>
       </div>
+
+      <footer className="ct-footer">
+        <div className="lp-footer-left">
+          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
+          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+        </div>
+        <div className="lp-footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Help Center</a>
+          <a href="#">Security</a>
+        </div>
+      </footer>
     </>
   );
 }
