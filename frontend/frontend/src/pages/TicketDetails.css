@@ -1,83 +1,296 @@
-.ticket-details-container {
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+.td-page {
+  padding: 30px 60px 50px;
+  background: var(--bg);
+  min-height: calc(100vh - 200px);
 }
 
-.back-link {
-  display: inline-block;
-  margin-bottom: 15px;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.back-link:hover {
-  color: var(--primary);
-}
-
-.ticket-details-container h2 {
+.td-top-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
   margin-bottom: 20px;
+}
+
+.td-close-btn, .td-resolve-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.td-close-btn {
+  background: var(--surface);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+}
+
+.td-close-btn:hover {
+  background: #fef2f2;
+}
+
+.td-resolve-btn {
+  background: var(--primary);
+  border: none;
+  color: white;
+}
+
+.td-resolve-btn:hover {
+  background: var(--primary-dark);
+}
+
+.td-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 18px;
+  width: 100%;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.td-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.td-tags {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.td-ref-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.td-status-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-open { background: var(--primary-light); color: var(--primary-dark); }
+.status-in-progress { background: #fef3c7; color: #92400e; }
+.status-pending { background: #f3e8ff; color: #6b21a8; }
+.status-resolved, .status-closed { background: #dcfce7; color: #166534; }
+
+.td-priority-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.td-header-left h2 {
+  font-size: 18px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.td-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.td-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.td-avatar.small {
+  width: 40px;
+  height: 40px;
+  background: var(--text-muted);
+}
+
+.td-card h4 {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.td-requester {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.td-requester-name {
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text);
 }
 
-.ticket-details-container form {
-  display: flex;
-  flex-direction: column;
-}
-
-.ticket-details-container label {
-  margin-top: 12px;
-  margin-bottom: 5px;
+.td-requester-email {
+  font-size: 12px;
   color: var(--text-muted);
-  font-size: 14px;
 }
 
-.ticket-details-container input,
-.ticket-details-container textarea,
-.ticket-details-container select {
+.td-divider {
+  border-top: 1px solid var(--border);
+  margin: 18px 0;
+}
+
+.td-card label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  margin-top: 12px;
+  text-transform: uppercase;
+}
+
+.td-card label:first-of-type {
+  margin-top: 0;
+}
+
+.td-card select {
   width: 100%;
-  padding: 10px;
+  padding: 8px 10px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 14px;
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text);
+  box-sizing: border-box;
 }
 
-.button-row {
+.td-description {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.td-attachments-header {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.save-btn {
-  flex: 1;
-  padding: 10px;
-  background-color: var(--primary);
-  color: white;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 15px;
+.td-attachments-header h4 {
+  margin-bottom: 0;
+}
+
+.td-download-all {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
   cursor: pointer;
 }
 
-.save-btn:hover {
-  background-color: var(--primary-dark);
+.td-attachments-grid {
+  margin-top: 14px;
 }
 
-.delete-btn {
-  flex: 1;
-  padding: 10px;
-  background-color: var(--danger);
-  color: white;
-  border: none;
+.td-attachment-placeholder {
+  border: 2px dashed var(--border);
   border-radius: var(--radius);
-  font-size: 15px;
-  cursor: pointer;
+  padding: 24px;
+  text-align: center;
+  color: var(--text-muted);
 }
 
-.delete-btn:hover {
-  background-color: #b91c1c;
+.td-attachment-placeholder span {
+  font-size: 22px;
+  display: block;
+  margin-bottom: 6px;
 }
+
+.td-attachment-placeholder p {
+  font-size: 12px;
+}
+
+.td-error {
+  color: var(--danger);
+  font-size: 13px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.td-success {
+  color: var(--success);
+  font-size: 13px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.td-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 60px;
+  background: var(--primary-light);
+  font-size: 13px;
+}
+
+.lp-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lp-footer-brand {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lp-footer-brand-accent {
+  color: var(--primary);
+}
+
+.lp-footer-copy {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.lp-footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.lp-footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.lp-footer-links a:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .td-page {
+    padding: 20px 20px 40px;
+  }
+}
+

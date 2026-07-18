@@ -15,11 +15,13 @@ $stmt = $conn->prepare("
     SELECT t.id, t.reference_no, t.title, t.description, 
            t.category_id, t.priority_id, t.status_id,
            c.name AS category, p.name AS priority, s.name AS status,
-           t.created_by, t.assigned_to, t.created_at
+           t.created_by, t.assigned_to, t.created_at,
+           u.name AS requested_by, u.email AS requester_email
     FROM tickets t
     JOIN categories c ON t.category_id = c.id
     JOIN priorities p ON t.priority_id = p.id
     JOIN statuses s ON t.status_id = s.id
+    JOIN users u ON t.created_by = u.id
     WHERE t.id = ?
 ");
 $stmt->bind_param("i", $ticket_id);
