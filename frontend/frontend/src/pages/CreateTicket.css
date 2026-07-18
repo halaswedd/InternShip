@@ -1,45 +1,236 @@
-.create-ticket-container {
-  max-width: 500px;
-  margin: 60px auto;
-  padding: 30px;
+.ct-page {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+  padding: 50px 20px;
+  background: var(--bg);
+}
+
+.ct-card {
   background: var(--surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-}
-
-.create-ticket-container h2 {
-  margin-bottom: 20px;
-  color: var(--text);
-}
-
-.create-ticket-container input,
-.create-ticket-container textarea,
-.create-ticket-container select {
+  padding: 35px;
   width: 100%;
-  padding: 10px;
+  max-width: 480px;
+  height: fit-content;
+}
+
+.ct-card h2 {
+  color: var(--text);
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.ct-subtitle {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.ct-card form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+  margin-top: 18px;
+}
+
+.ct-card form label:first-of-type {
+  margin-top: 0;
+}
+
+.ct-card form input,
+.ct-card form select,
+.ct-card form textarea {
+  width: 100%;
+  padding: 10px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   font-size: 14px;
+  background: var(--bg);
+  font-family: inherit;
 }
 
-.create-ticket-container label {
-  display: block;
-  margin-bottom: 5px;
-  color: var(--text-muted);
-  font-size: 14px;
+.ct-card form input:focus,
+.ct-card form select:focus,
+.ct-card form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
 }
 
-.create-ticket-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: var(--primary);
-  color: white;
-  border: none;
+.ct-row {
+  display: flex;
+  gap: 14px;
+}
+
+.ct-field {
+  flex: 1;
+}
+
+.ct-priority-pills {
+  display: flex;
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  font-size: 15px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.ct-pill {
+  flex: 1;
+  padding: 10px 4px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ct-pill:hover {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--primary-dark);
+}
+
+.ct-pill.active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.ct-pill.active:hover {
+  background: var(--primary-light);
+}
+
+.ct-dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 30px 20px;
+  text-align: center;
+  background: var(--bg);
+}
+
+.ct-dropzone-icon {
+  font-size: 26px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ct-dropzone p {
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.ct-browse {
+  color: var(--primary);
+  font-weight: 600;
   cursor: pointer;
 }
 
-.create-ticket-container button:hover {
-  background-color: var(--primary-dark);
+.ct-dropzone-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ct-divider {
+  border-top: 1px solid var(--border);
+  margin: 24px 0 20px;
+}
+
+.ct-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.ct-cancel {
+  padding: 10px 22px;
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ct-cancel:hover {
+  background: var(--primary-light);
+}
+
+.ct-submit {
+  padding: 10px 22px;
+  background: var(--primary);
+  border: none;
+  color: white;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ct-submit:hover {
+  background: var(--primary-dark);
+}
+
+.ct-error {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.ct-success {
+  color: var(--success);
+  font-size: 13px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.ct-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 60px;
+  background: var(--primary-light);
+  font-size: 13px;
+}
+
+.lp-footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lp-footer-brand {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.lp-footer-brand-accent {
+  color: var(--primary);
+}
+
+.lp-footer-copy {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.lp-footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.lp-footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.lp-footer-links a:hover {
+  color: var(--primary);
 }
