@@ -130,62 +130,64 @@ function TicketDetails() {
           </div>
         </div>
 
-        <div className="td-card td-requester-properties">
-          <h4>REQUESTER</h4>
-          <div className="td-requester">
-            <div className="td-avatar small">{initials(ticket.requested_by)}</div>
-            <div>
-              <p className="td-requester-name">{ticket.requested_by || "Unknown"}</p>
-              <p className="td-requester-email">{ticket.requester_email || ""}</p>
+        <div className="td-row">
+          <div className="td-card">
+            <h4>REQUESTER</h4>
+            <div className="td-requester">
+              <div className="td-avatar small">{initials(ticket.requested_by)}</div>
+              <div>
+                <p className="td-requester-name">{ticket.requested_by || "Unknown"}</p>
+                <p className="td-requester-email">{ticket.requester_email || ""}</p>
+              </div>
             </div>
+
+            <div className="td-divider"></div>
+
+            <h4>PROPERTIES</h4>
+            <label>Status</label>
+            <select
+              value={statusId}
+              onChange={(e) => { setStatusId(e.target.value); updateTicket({ status_id: e.target.value }); }}
+            >
+              <option value="1">Open</option>
+              <option value="2">In Progress</option>
+              <option value="3">Pending</option>
+              <option value="4">Resolved</option>
+              <option value="5">Closed</option>
+            </select>
+
+            <label>Priority</label>
+            <select
+              value={priorityId}
+              onChange={(e) => { setPriorityId(e.target.value); updateTicket({ priority_id: e.target.value }); }}
+            >
+              <option value="1">Low</option>
+              <option value="2">Medium</option>
+              <option value="3">High</option>
+              <option value="4">Urgent</option>
+            </select>
+
+            <label>Category</label>
+            <select
+              value={categoryId}
+              onChange={(e) => { setCategoryId(e.target.value); updateTicket({ category_id: e.target.value }); }}
+            >
+              <option value="1">Hardware</option>
+              <option value="2">Software</option>
+              <option value="3">Network</option>
+              <option value="4">Email</option>
+              <option value="5">Access Request</option>
+              <option value="6">Other</option>
+            </select>
           </div>
 
-          <div className="td-divider"></div>
-
-          <h4>PROPERTIES</h4>
-          <label>Status</label>
-          <select
-            value={statusId}
-            onChange={(e) => { setStatusId(e.target.value); updateTicket({ status_id: e.target.value }); }}
-          >
-            <option value="1">Open</option>
-            <option value="2">In Progress</option>
-            <option value="3">Pending</option>
-            <option value="4">Resolved</option>
-            <option value="5">Closed</option>
-          </select>
-
-          <label>Priority</label>
-          <select
-            value={priorityId}
-            onChange={(e) => { setPriorityId(e.target.value); updateTicket({ priority_id: e.target.value }); }}
-          >
-            <option value="1">Low</option>
-            <option value="2">Medium</option>
-            <option value="3">High</option>
-            <option value="4">Urgent</option>
-          </select>
-
-          <label>Category</label>
-          <select
-            value={categoryId}
-            onChange={(e) => { setCategoryId(e.target.value); updateTicket({ category_id: e.target.value }); }}
-          >
-            <option value="1">Hardware</option>
-            <option value="2">Software</option>
-            <option value="3">Network</option>
-            <option value="4">Email</option>
-            <option value="5">Access Request</option>
-            <option value="6">Other</option>
-          </select>
+          <div className="td-card">
+            <h4>DESCRIPTION</h4>
+            <p className="td-description">{ticket.description || "No description provided."}</p>
+          </div>
         </div>
 
-        <div className="td-card td-description-card">
-          <h4>DESCRIPTION</h4>
-          <p className="td-description">{ticket.description || "No description provided."}</p>
-        </div>
-
-        <div className="td-card td-description-card">
+        <div className="td-card">
           <div className="td-attachments-header">
             <h4>ATTACHMENTS</h4>
             <span className="td-download-all">Download All</span>
