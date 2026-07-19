@@ -47,12 +47,14 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
-  margin-bottom: 18px;
+  box-sizing: border-box;
+}
+
+/* البطاقات يلي مش جوا صف (Header و Attachments) بتاخد عرض كامل موحد */
+.td-page > .td-card {
   width: 100%;
   max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
+  margin: 0 auto 12px;
 }
 
 .td-header-card {
@@ -126,6 +128,15 @@
   width: 40px;
   height: 40px;
   background: var(--text-muted);
+}
+
+/* الصف يلي فيه عمودين: Requester/Properties + Description */
+.td-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto 12px;
 }
 
 .td-card h4 {
@@ -289,8 +300,10 @@
 }
 
 @media (max-width: 768px) {
+  .td-row {
+    grid-template-columns: 1fr;
+  }
   .td-page {
     padding: 20px 20px 40px;
   }
 }
-
