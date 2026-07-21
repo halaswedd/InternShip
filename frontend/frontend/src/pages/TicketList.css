@@ -272,3 +272,50 @@ td {
   text-decoration: none;
   font-size: 12px;
 }
+
+@media (max-width: 768px) {
+  .tl-content {
+    padding: 20px 16px;
+  }
+
+  .tl-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .tl-create-btn {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .tl-filters {
+    flex-direction: column;
+  }
+
+  .tl-search {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tl-filters select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  
+  .tl-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  table {
+    min-width: 700px;
+  }
+
+  .tl-pagination {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
