@@ -88,3 +88,42 @@ select:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px var(--primary-light);
 }
+
+.admin-tabs {
+  display: flex;
+  justify-content: flex-end; /* على اليمين */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-tab {
+  min-width: 150px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.admin-tab:hover {
+  background: #2563eb;
+  transform: translateY(-3px);
+}
+
+.admin-tab.active {
+  background: #1d4ed8;
+}
+
+.admin-tab.active:hover {
+  background: #1e40af;
+  transform: translateY(-3px);
+}
+
+.admin-tab:focus {
+  outline: none;
+  box-shadow: none;
+}
