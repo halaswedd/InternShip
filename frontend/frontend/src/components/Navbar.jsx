@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Bell, User, Settings } from "lucide-react";
+import { Bell, User, UserCog } from "lucide-react";
 import "./Navbar.css";
 
 function Navbar() {
@@ -23,10 +23,10 @@ function Navbar() {
           <Bell size={18} />
         </Link>
         {isAdmin && (
-          <Link to="/admin" className="icon-btn" title="Admin Panel">
-            <Settings size={18} />
-          </Link>
-        )}
+        <Link to="/admin" className="icon-btn" title="Admin Panel">
+          <UserCog size={18} />
+        </Link>
+      )}
         <Link to="/profile" className="icon-btn" title="Profile">
           <User size={18} />
         </Link>

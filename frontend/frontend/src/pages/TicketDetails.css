@@ -307,3 +307,62 @@
     padding: 20px 20px 40px;
   }
 }
+
+.td-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.td-comment-form textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: inherit;
+  background: var(--bg);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.td-comment-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.td-comment-form button {
+  align-self: flex-end;
+  padding: 10px 22px;
+}
+
+.td-comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.td-comment {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.td-comment:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.td-comment .td-requester-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.td-comment .td-description {
+  margin: 0;
+}
