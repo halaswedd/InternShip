@@ -38,6 +38,7 @@ $stmt = $conn->prepare("DELETE FROM tickets WHERE id = ?");
 $stmt->bind_param("i", $ticket_id);
 
 if ($stmt->execute()) {
+    log_activity($conn, $user->user_id, "Deleted ticket #$ticket_id");
     echo json_encode(["success" => true, "message" => "Ticket deleted successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to delete ticket"]);
