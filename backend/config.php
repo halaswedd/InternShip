@@ -1,5 +1,6 @@
 <?php
 require_once "db.php";
+require_once "logger.php";
 
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");

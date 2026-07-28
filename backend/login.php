@@ -42,7 +42,7 @@ $payload = [
 ];
 
 $jwt = JWT::encode($payload, $secret_key, 'HS256');
-
+log_activity($conn, $user['id'], "User logged in");
 echo json_encode([
     "success" => true,
     "message" => "Login successful",

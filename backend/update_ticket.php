@@ -46,6 +46,7 @@ $stmt = $conn->prepare("UPDATE tickets SET title = ?, description = ?, category_
 $stmt->bind_param("ssiiii", $title, $description, $category_id, $priority_id, $status_id, $ticket_id);
 
 if ($stmt->execute()) {
+    log_activity($conn, $user->user_id, "Updated ticket #$ticket_id");
     echo json_encode(["success" => true, "message" => "Ticket updated successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to update ticket"]);

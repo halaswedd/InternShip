@@ -26,6 +26,7 @@ $stmt = $conn->prepare("INSERT INTO tickets (reference_no, title, description, c
 $stmt->bind_param("sssiiii", $reference_no, $title, $description, $category_id, $priority_id, $status_id, $created_by);
 
 if ($stmt->execute()) {
+    log_activity($conn, $created_by, "Created ticket $reference_no");
     echo json_encode([
         "success" => true,
         "message" => "Ticket created successfully",

@@ -17,6 +17,10 @@ function TicketDetails() {
   const [categoryId, setCategoryId] = useState("");
   const [priorityId, setPriorityId] = useState("");
   const [statusId, setStatusId] = useState("");
+  const [agents, setAgents] = useState([]);
+  const [assignedTo, setAssignedTo] = useState("");
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
@@ -34,6 +38,7 @@ function TicketDetails() {
         setCategoryId(t.category_id);
         setPriorityId(t.priority_id);
         setStatusId(t.status_id);
+        setAssignedTo(t.assigned_to || "");
       } else {
         setError(data.message);
       }
@@ -44,8 +49,40 @@ function TicketDetails() {
     }
   };
 
+  const fetchAgents = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost/InternShip/backend/get_agents.php",
+        { method: "GET", headers: { "Authorization": `Bearer ${token}` } }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setAgents(data.agents);
+      }
+    } catch (err) {
+      console.error("Failed to load agents");
+    }
+  };
+
+  const fetchComments = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost/InternShip/backend/get_comments.php?ticket_id=${id}`,
+        { method: "GET", headers: { "Authorization": `Bearer ${token}` } }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setComments(data.comments);
+      }
+    } catch (err) {
+      console.error("Failed to load comments");
+    }
+  };
+
   useEffect(() => {
     fetchTicket();
+    fetchAgents();
+    fetchComments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -77,6 +114,56 @@ function TicketDetails() {
       }
     } catch (err) {
       setError("Something went wrong while updating.");
+    }
+  };
+
+  const assignTicket = async (agentId) => {
+    setError("");
+    setSuccess("");
+    try {
+      const response = await fetch("http://localhost/InternShip/backend/assign_ticket.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ticket_id: id, agent_id: agentId }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSuccess("Ticket assigned!");
+        setAssignedTo(agentId);
+        fetchTicket();
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      setError("Something went wrong while assigning.");
+    }
+  };
+
+  const addComment = async () => {
+    if (!newComment.trim()) return;
+    setError("");
+    setSuccess("");
+    try {
+      const response = await fetch("http://localhost/InternShip/backend/add_comment.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({ ticket_id: id, comment: newComment }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        setNewComment("");
+        fetchComments();
+      } else {
+        setError(data.message);
+      }
+    } catch (err) {
+      setError("Something went wrong while adding your comment.");
     }
   };
 
@@ -179,6 +266,19 @@ function TicketDetails() {
               <option value="5">Access Request</option>
               <option value="6">Other</option>
             </select>
+
+            <label>Assign to</label>
+            <select
+              value={assignedTo}
+              onChange={(e) => assignTicket(e.target.value)}
+            >
+              <option value="">Unassigned</option>
+              {agents.map((agent) => (
+                <option key={agent.id} value={agent.id}>
+                  {agent.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="td-card">
@@ -197,6 +297,40 @@ function TicketDetails() {
               <span>📎</span>
               <p>No attachments yet</p>
             </div>
+          </div>
+        </div>
+
+        <div className="td-card">
+          <h4>COMMENTS</h4>
+
+          <div className="td-comment-form">
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write a comment..."
+              rows={3}
+            />
+            <button className="td-resolve-btn" onClick={addComment}>
+              Add Comment
+            </button>
+          </div>
+
+          <div className="td-comments-list">
+            {comments.length === 0 && <p className="td-meta">No comments yet.</p>}
+            {comments.map((c) => (
+              <div key={c.id} className="td-comment">
+                <div className="td-avatar small">{initials(c.commenter_name)}</div>
+                <div>
+                  <p className="td-requester-name">
+                    {c.commenter_name}{" "}
+                    <span className="td-meta">
+                      {new Date(c.created_at).toLocaleString()}
+                    </span>
+                  </p>
+                  <p className="td-description">{c.comment}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
