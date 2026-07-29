@@ -1,0 +1,238 @@
+.rp-page {
+  padding: 30px 40px 50px;
+  background: var(--bg);
+  min-height: calc(100vh - 200px);
+}
+
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.rp-header h2 {
+  font-size: 24px;
+  color: var(--text);
+}
+
+.rp-header p {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.rp-export-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.rp-export-btn {
+  padding: 9px 18px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rp-export-btn.outline {
+  background: var(--surface);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.rp-export-btn.outline:hover {
+  background: var(--primary-light);
+}
+
+.rp-export-btn.filled {
+  background: var(--primary);
+  border: none;
+  color: white;
+}
+
+.rp-export-btn.filled:hover {
+  background: var(--primary-dark);
+}
+
+.rp-widgets {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.rp-widget {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.rp-widget-label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.rp-widget-number {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rp-widget-number.orange {
+  color: #c2410c;
+}
+
+.rp-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.rp-panel h3 {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.rp-chart-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rp-chart-panel h3 {
+  align-self: flex-start;
+}
+
+.rp-chart-svg {
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+}
+
+.rp-muted {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.rp-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 16px;
+}
+
+.rp-row .rp-panel {
+  margin-bottom: 0;
+}
+
+.rp-performers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rp-performer-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rp-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.rp-performer-info {
+  flex: 1;
+}
+
+.rp-performer-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rp-performer-count {
+  background: var(--primary);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 11px;
+}
+
+.rp-status-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-open { background: var(--primary-light); color: var(--primary-dark); }
+.status-in-progress { background: #fef3c7; color: #92400e; }
+.status-pending { background: #f3e8ff; color: #6b21a8; }
+.status-resolved, .status-closed { background: #dcfce7; color: #166534; }
+
+.rp-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 60px;
+  background: var(--primary-light);
+  font-size: 13px;
+}
+
+.lp-footer-left { display: flex; flex-direction: column; gap: 4px; }
+.lp-footer-brand { font-weight: 700; color: var(--text); }
+.lp-footer-brand-accent { color: var(--primary); }
+.lp-footer-copy { color: var(--text-muted); font-size: 12px; }
+.lp-footer-links { display: flex; gap: 20px; }
+.lp-footer-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; }
+.lp-footer-links a:hover { color: var(--primary); }
+
+@media (max-width: 900px) {
+  .rp-row {
+    grid-template-columns: 1fr;
+  }
+  .rp-widgets {
+    flex-direction: column;
+  }
+  .rp-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
