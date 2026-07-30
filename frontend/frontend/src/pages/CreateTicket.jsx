@@ -15,9 +15,24 @@ function CreateTicket() {
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [priorityId, setPriorityId] = useState("1");
+  const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
+
+  const uploadFiles = async (ticketId, token) => {
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("ticket_id", ticketId);
+
+      await fetch("http://localhost/InternShip/backend/upload_attachment.php", {
+        method: "POST",
+        headers: { "Authorization": `Bearer ${token}` },
+        body: formData,
+      });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +64,9 @@ function CreateTicket() {
       const data = await response.json();
 
       if (data.success) {
+        if (files.length > 0) {
+          await uploadFiles(data.ticket_id, token);
+        }
         setSuccess(`Ticket created! Reference: ${data.reference_no}`);
         setTimeout(() => navigate("/tickets"), 1500);
       } else {
@@ -117,10 +135,21 @@ function CreateTicket() {
             />
 
             <label>Attachments</label>
-            <div className="ct-dropzone">
+            <div className="ct-dropzone" onClick={() => document.getElementById("fileInput").click()}>
+              <input
+                id="fileInput"
+                type="file"
+                multiple
+                accept=".pdf,.png,.jpg,.jpeg"
+                style={{ display: "none" }}
+                onChange={(e) => setFiles(Array.from(e.target.files))}
+              />
               <span className="ct-dropzone-icon">☁️</span>
-              <p>Drag & drop files or <span className="ct-browse">browse</span></p>
+              <p>Click to <span className="ct-browse">browse</span> files</p>
               <span className="ct-dropzone-hint">Max file size: 10MB (PDF, PNG, JPG)</span>
+              {files.length > 0 && (
+                <p className="ct-selected-files">{files.map((f) => f.name).join(", ")}</p>
+              )}
             </div>
 
             <div className="ct-divider"></div>

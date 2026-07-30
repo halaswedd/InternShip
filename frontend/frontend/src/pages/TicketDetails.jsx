@@ -24,6 +24,7 @@ function TicketDetails() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
+  const [attachments, setAttachments] = useState([]);
 
   const fetchTicket = async () => {
     try {
@@ -79,13 +80,29 @@ function TicketDetails() {
     }
   };
 
+  const fetchAttachments = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost/InternShip/backend/get_attachments.php?ticket_id=${id}`,
+        { method: "GET", headers: { "Authorization": `Bearer ${token}` } }
+      );
+      const data = await response.json();
+      if (data.success) {
+        setAttachments(data.attachments);
+      }
+    } catch (err) {
+      console.error("Failed to load attachments");
+    }
+  };
+
   useEffect(() => {
     fetchTicket();
     fetchAgents();
     fetchComments();
+    fetchAttachments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-
+  
   const updateTicket = async (fields) => {
     setError("");
     setSuccess("");
@@ -289,14 +306,27 @@ function TicketDetails() {
 
         <div className="td-card">
           <div className="td-attachments-header">
-            <h4>ATTACHMENTS</h4>
-            <span className="td-download-all">Download All</span>
+            <h4>ATTACHMENTS ({attachments.length})</h4>
           </div>
           <div className="td-attachments-grid">
-            <div className="td-attachment-placeholder">
-              <span>📎</span>
-              <p>No attachments yet</p>
-            </div>
+            {attachments.length === 0 && (
+              <div className="td-attachment-placeholder">
+                <span>📎</span>
+                <p>No attachments yet</p>
+              </div>
+            )}
+            {attachments.map((att) => (
+              <a
+                key={att.id}
+                href={`http://localhost/InternShip/backend/${att.file_path}`}
+                target="_blank"
+                rel="noreferrer"
+                className="td-attachment-item"
+              >
+                {att.file_type === "application/pdf" ? "📄" : "🖼️"}
+                <span>{att.file_path.split("/").pop()}</span>
+              </a>
+            ))}
           </div>
         </div>
 

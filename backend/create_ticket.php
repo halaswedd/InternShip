@@ -30,7 +30,8 @@ if ($stmt->execute()) {
     echo json_encode([
         "success" => true,
         "message" => "Ticket created successfully",
-        "reference_no" => $reference_no
+        "reference_no" => $reference_no,
+        "ticket_id" => $conn->insert_id
     ]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to create ticket"]);
