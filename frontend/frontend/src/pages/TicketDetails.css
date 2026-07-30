@@ -366,3 +366,27 @@
 .td-comment .td-description {
   margin: 0;
 }
+.td-attachments-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.td-attachment-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 12px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.td-attachment-item:hover {
+  border-color: var(--primary);
+  color: var(--primary-dark);
+}
