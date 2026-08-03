@@ -33,7 +33,9 @@ function AdminPanel() {
   const [newUser, setNewUser] = useState({ name: "", email: "", password: "", role_id: "3" });
   const [showAddCategory, setShowAddCategory] = useState(false);
   const [newCategory, setNewCategory] = useState("");
-
+  const handlePrint = () => {
+    window.print();
+  };
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(true);
@@ -364,10 +366,10 @@ function AdminPanel() {
           <div className="ap-panel">
             <h3>Reports Generation</h3>
             <p className="ap-muted" style={{ marginBottom: 14 }}>Generate comprehensive data visualizations for stakeholders.</p>
-            <button className="ap-report-btn" disabled title="Coming soon">Generate Monthly Report</button>
+            <button className="ap-report-btn" onClick={handlePrint}>Generate Monthly Report</button>
             <div className="ap-report-formats">
-              <button disabled>PDF</button>
-              <button disabled>Excel</button>
+              <button onClick={handlePrint}>PDF</button>
+              <button onClick={handlePrint}>Excel</button>
             </div>
           </div>
         </div>
