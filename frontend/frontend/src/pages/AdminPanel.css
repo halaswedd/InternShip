@@ -351,10 +351,10 @@ th {
 
 .ap-report-formats button {
   flex: 1;
-  padding: 10px 0;
+  padding: 10px;
   background: #fff;
-  color: var(--primary);
-  border: 1px solid #d6dbe5;
+  color: #2563eb;
+  border: 1.5px solid #2563eb;
   border-radius: var(--radius);
   font-size: 13px;
   font-weight: 600;
@@ -363,9 +363,9 @@ th {
 }
 
 .ap-report-formats button:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
+  background: #dbeafe; 
+  color: #2563eb;
+  border-color: #2563eb;
 }
 
 .ap-report-formats button:active {
