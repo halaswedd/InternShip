@@ -26,12 +26,15 @@ $stmt = $conn->prepare("INSERT INTO tickets (reference_no, title, description, c
 $stmt->bind_param("sssiiii", $reference_no, $title, $description, $category_id, $priority_id, $status_id, $created_by);
 
 if ($stmt->execute()) {
+    $new_ticket_id = $conn->insert_id; 
+
     log_activity($conn, $created_by, "Created ticket $reference_no");
+
     echo json_encode([
         "success" => true,
         "message" => "Ticket created successfully",
         "reference_no" => $reference_no,
-        "ticket_id" => $conn->insert_id
+        "ticket_id" => $new_ticket_id
     ]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to create ticket"]);
