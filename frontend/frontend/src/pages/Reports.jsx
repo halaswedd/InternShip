@@ -48,16 +48,18 @@ function Reports() {
 
   const chartWidth = 600;
   const chartHeight = 160;
-  const chartPadding = 20; // مسافة فوق وتحت حتى ما تنقص النقط عند الحواف
+  const chartPadding = 20; 
+  const horizontalPadding = 30; 
+
+  const getX = (i) =>
+    monthly.length > 1
+      ? horizontalPadding + (i / (monthly.length - 1)) * (chartWidth - horizontalPadding * 2)
+      : chartWidth / 2;
 
   const getY = (count) =>
     chartPadding + (1 - count / maxCount) * (chartHeight - chartPadding * 2);
 
-  const points = monthly.map((m, i) => {
-    const x = monthly.length > 1 ? (i / (monthly.length - 1)) * chartWidth : chartWidth / 2;
-    return `${x},${getY(m.count)}`;
-  }).join(" ");
-
+  const points = monthly.map((m, i) => `${getX(i)},${getY(m.count)}`).join(" ");
   return (
     <>
       <Navbar />
@@ -108,7 +110,7 @@ function Reports() {
                 strokeWidth="2.5"
               />
               {monthly.map((m, i) => {
-                const x = monthly.length > 1 ? (i / (monthly.length - 1)) * chartWidth : chartWidth / 2;
+                const x = getX(i);
                 const y = getY(m.count);
                 return (
                   <g key={m.label}>
