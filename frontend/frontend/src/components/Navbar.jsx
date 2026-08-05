@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Bell, User, UserCog } from "lucide-react";
+import { User, UserCog } from "lucide-react";
+import NotificationBell from "./NotificationsBell";
 import "./Navbar.css";
 
 function Navbar() {
@@ -19,9 +20,7 @@ function Navbar() {
       </div>
 
       <div className="app-nav-icons">
-        <Link to="/notifications" className="icon-btn" title="Notifications">
-          <Bell size={18} />
-        </Link>
+        <NotificationBell />
         {isAdmin && (
         <Link to="/admin" className="icon-btn" title="Admin Panel">
           <UserCog size={18} />
