@@ -5,11 +5,11 @@ function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const token = localStorage.getItem("token");
+
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const token = localStorage.getItem("token");
-
         const response = await fetch(
           "http://localhost/InternShip/backend/get_notifications.php",
           {
@@ -33,7 +33,33 @@ function Notifications() {
     };
 
     fetchNotifications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const markAsRead = async (notificationId) => {
+    // Update the UI immediately so the badge disappears right away
+    setNotifications((prev) =>
+      prev.map((n) =>
+        n.id === notificationId ? { ...n, is_read: 1 } : n
+      )
+    );
+
+    try {
+      await fetch(
+        "http://localhost/InternShip/backend/mark_notification_read.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ notification_id: notificationId }),
+        }
+      );
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
+  };
 
   return (
     <div>
@@ -50,6 +76,9 @@ function Notifications() {
           notifications.map((notification) => (
             <div
               key={notification.id}
+              onClick={() =>
+                notification.is_read == 0 && markAsRead(notification.id)
+              }
               style={{
                 border: "1px solid #ddd",
                 borderRadius: "10px",
@@ -57,6 +86,7 @@ function Notifications() {
                 marginBottom: "15px",
                 background: "#fff",
                 boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+                cursor: notification.is_read == 0 ? "pointer" : "default",
               }}
             >
               <h4 style={{ margin: 0 }}>{notification.message}</h4>

@@ -49,6 +49,7 @@ $stmt->bind_param("ii", $agent_id, $ticket_id);
 
 if ($stmt->execute()) {
     log_activity($conn, $user->user_id, "Assigned ticket #$ticket_id to agent #$agent_id");
+    create_notification($conn, $agent_id, "You have been assigned to ticket #$ticket_id");
     echo json_encode(["success" => true, "message" => "Ticket assigned successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to assign ticket"]);

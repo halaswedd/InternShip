@@ -19,7 +19,7 @@ if (empty($ticket_id)) {
 }
 
 
-$check = $conn->prepare("SELECT created_by, assigned_to FROM tickets WHERE id = ?");
+$check = $conn->prepare("SELECT created_by, assigned_to, status_id FROM tickets WHERE id = ?");
 $check->bind_param("i", $ticket_id);
 $check->execute();
 $result = $check->get_result();
@@ -47,6 +47,9 @@ $stmt->bind_param("ssiiii", $title, $description, $category_id, $priority_id, $s
 
 if ($stmt->execute()) {
     log_activity($conn, $user->user_id, "Updated ticket #$ticket_id");
+    if ($ticket['status_id'] != $status_id && $ticket['created_by'] != $user->user_id) {
+    create_notification($conn, $ticket['created_by'], "Ticket #$ticket_id status changed");
+}
     echo json_encode(["success" => true, "message" => "Ticket updated successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to update ticket"]);
