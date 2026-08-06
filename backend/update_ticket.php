@@ -50,6 +50,7 @@ if ($stmt->execute()) {
     if ($ticket['status_id'] != $status_id && $ticket['created_by'] != $user->user_id) {
     create_notification($conn, $ticket['created_by'], "Ticket #$ticket_id status changed");
 }
+notify_all_admins($conn, "Ticket #$ticket_id was updated", $user->user_id);
     echo json_encode(["success" => true, "message" => "Ticket updated successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to update ticket"]);

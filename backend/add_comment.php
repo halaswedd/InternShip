@@ -42,6 +42,7 @@ if ($ticketRow['created_by'] != $user->user_id) {
 if (!empty($ticketRow['assigned_to']) && $ticketRow['assigned_to'] != $user->user_id && $ticketRow['assigned_to'] != $ticketRow['created_by']) {
     create_notification($conn, $ticketRow['assigned_to'], "New comment on ticket #$ticket_id");
 }
+notify_all_admins($conn, "New comment on ticket #$ticket_id", $user->user_id);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to add comment"]);
 }

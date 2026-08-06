@@ -16,7 +16,7 @@ $check = $conn->prepare("SELECT id FROM notifications WHERE id = ? AND user_id =
 $check->bind_param("ii", $notification_id, $user->user_id);
 $check->execute();
 $result = $check->get_result();
-
+ 
 if ($result->num_rows === 0) {
     echo json_encode(["success" => false, "message" => "Notification not found"]);
     exit;

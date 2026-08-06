@@ -30,6 +30,7 @@ $stmt = $conn->prepare("INSERT INTO users (role_id, name, email, password_hash) 
 $stmt->bind_param("isss", $role_id, $name, $email, $hashed_password);
 
 if ($stmt->execute()) {
+    notify_all_admins($conn, "New user registered: $name");
     echo json_encode(["success" => true, "message" => "User registered successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Registration failed"]);
