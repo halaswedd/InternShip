@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
@@ -37,7 +39,6 @@ function Notifications() {
   }, []);
 
   const markAsRead = async (notificationId) => {
-    // Update the UI immediately so the badge disappears right away
     setNotifications((prev) =>
       prev.map((n) =>
         n.id === notificationId ? { ...n, is_read: 1 } : n
@@ -61,6 +62,15 @@ function Notifications() {
     }
   };
 
+  const handleNotificationClick = (notification) => {
+    if (notification.is_read == 0) {
+      markAsRead(notification.id);
+    }
+    if (notification.ticket_id) {
+      navigate(`/tickets/${notification.ticket_id}`);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -76,9 +86,7 @@ function Notifications() {
           notifications.map((notification) => (
             <div
               key={notification.id}
-              onClick={() =>
-                notification.is_read == 0 && markAsRead(notification.id)
-              }
+              onClick={() => handleNotificationClick(notification)}
               style={{
                 border: "1px solid #ddd",
                 borderRadius: "10px",
@@ -86,7 +94,7 @@ function Notifications() {
                 marginBottom: "15px",
                 background: "#fff",
                 boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-                cursor: notification.is_read == 0 ? "pointer" : "default",
+                cursor: notification.ticket_id ? "pointer" : "default",
               }}
             >
               <h4 style={{ margin: 0 }}>{notification.message}</h4>

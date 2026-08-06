@@ -29,7 +29,7 @@ if ($stmt->execute()) {
     $new_ticket_id = $conn->insert_id;
 
     log_activity($conn, $created_by, "Created ticket $reference_no");
-   notify_all_admins($conn, "New ticket created: $reference_no", $created_by);
+   notify_all_admins($conn, "New ticket created: $reference_no", $created_by, $new_ticket_id);
 
     echo json_encode([
         "success" => true,

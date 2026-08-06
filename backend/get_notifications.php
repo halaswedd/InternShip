@@ -4,7 +4,7 @@ require_once "auth_middleware.php";
 
 $user = authenticate();
 
-$stmt = $conn->prepare("SELECT id, message, is_read, created_at FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 50");
+$stmt = $conn->prepare("SELECT id, message, is_read, created_at, ticket_id FROM notifications WHERE user_id = ? ORDER BY created_at DESC LIMIT 50");
 $stmt->bind_param("i", $user->user_id);
 $stmt->execute();
 $result = $stmt->get_result();

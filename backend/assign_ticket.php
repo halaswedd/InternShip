@@ -22,8 +22,7 @@ if ($user->role_id != 1 && $user->role_id != 4) {
     exit;
 }
 
-// Make sure the ticket exists
-$check = $conn->prepare("SELECT id FROM tickets WHERE id = ?");
+$check = $conn->prepare("SELECT id, reference_no FROM tickets WHERE id = ?");
 $check->bind_param("i", $ticket_id);
 $check->execute();
 $result = $check->get_result();
@@ -32,8 +31,9 @@ if ($result->num_rows === 0) {
     echo json_encode(["success" => false, "message" => "Ticket not found"]);
     exit;
 }
+$ticketRow = $result->fetch_assoc();
+$ref = $ticketRow['reference_no'];
 
-// Make sure the agent exists and is actually an agent (role_id = 2)
 $agentCheck = $conn->prepare("SELECT id FROM users WHERE id = ? AND role_id = 2");
 $agentCheck->bind_param("i", $agent_id);
 $agentCheck->execute();
@@ -49,7 +49,7 @@ $stmt->bind_param("ii", $agent_id, $ticket_id);
 
 if ($stmt->execute()) {
     log_activity($conn, $user->user_id, "Assigned ticket #$ticket_id to agent #$agent_id");
-    create_notification($conn, $agent_id, "You have been assigned to ticket #$ticket_id");
+    create_notification($conn, $agent_id, "You have been assigned to ticket $ref", $ticket_id);
     echo json_encode(["success" => true, "message" => "Ticket assigned successfully"]);
 } else {
     echo json_encode(["success" => false, "message" => "Failed to assign ticket"]);

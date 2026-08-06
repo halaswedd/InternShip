@@ -153,7 +153,7 @@ function NotificationBell() {
                             Authorization: `Bearer ${token}`,
                         },
                         body: JSON.stringify({
-                            id: notification.id,
+                         notification_id: notification.id,
                         }),
                         }
                     );
