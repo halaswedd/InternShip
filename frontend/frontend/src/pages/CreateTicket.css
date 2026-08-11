@@ -234,3 +234,39 @@
 .lp-footer-links a:hover {
   color: var(--primary);
 }
+
+.ct-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.ct-label-row label {
+  margin: 0;
+}
+
+.ct-ai-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--primary-light);
+  border: none;
+  color: var(--primary-dark);
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ct-ai-btn:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.ct-ai-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

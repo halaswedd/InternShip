@@ -1,0 +1,10 @@
+# Environment files
+.env
+.env.*
+
+# Backend secrets
+backend/config.php
+
+node_modules
+dist
+dist-ssr

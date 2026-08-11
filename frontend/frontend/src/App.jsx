@@ -13,6 +13,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
+import AiAssistant from "./pages/AiAssistant";
 
 function App() {
   return (
@@ -86,6 +87,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Reports />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/ai-assistant"
+        element={
+          <ProtectedRoute>
+            <AiAssistant />
           </ProtectedRoute>
         }
       />

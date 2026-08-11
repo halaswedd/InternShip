@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import Navbar from "../components/Navbar";
 import "./CreateTicket.css";
 
@@ -18,6 +19,7 @@ function CreateTicket() {
   const [files, setFiles] = useState([]);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
   const navigate = useNavigate();
 
   const uploadFiles = async (ticketId, token) => {
@@ -31,6 +33,49 @@ function CreateTicket() {
         headers: { "Authorization": `Bearer ${token}` },
         body: formData,
       });
+    }
+  };
+
+  const handleAiSuggest = async () => {
+    if (!description.trim()) {
+      setError("Please write a description first so AI can analyze it.");
+      return;
+    }
+    setAiLoading(true);
+    setError("");
+
+    const token = localStorage.getItem("token");
+
+    try {
+      const [catRes, priRes] = await Promise.all([
+        fetch("http://localhost/InternShip/backend/ai_categorize_ticket.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+          body: JSON.stringify({ description }),
+        }),
+        fetch("http://localhost/InternShip/backend/ai_detect_priority.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+          body: JSON.stringify({ description }),
+        }),
+      ]);
+
+      const catData = await catRes.json();
+      const priData = await priRes.json();
+
+      const categoryMap = { "Hardware": "1", "Software": "2", "Network": "3", "Email": "4", "Access Request": "5", "Other": "6" };
+      const priorityMap = { "Low": "1", "Medium": "2", "High": "3", "Urgent": "4", "Critical": "4" };
+
+      if (catData.success && categoryMap[catData.suggested_category]) {
+        setCategoryId(categoryMap[catData.suggested_category]);
+      }
+      if (priData.success && priorityMap[priData.suggested_priority]) {
+        setPriorityId(priorityMap[priData.suggested_priority]);
+      }
+    } catch (err) {
+      setError("AI suggestion failed. Please select manually.");
+    } finally {
+      setAiLoading(false);
     }
   };
 
@@ -95,6 +140,19 @@ function CreateTicket() {
               required
             />
 
+            <div className="ct-label-row">
+              <label>Detailed Description</label>
+              <button type="button" className="ct-ai-btn" onClick={handleAiSuggest} disabled={aiLoading}>
+                <Sparkles size={13} /> {aiLoading ? "Analyzing..." : "Suggest with AI"}
+              </button>
+            </div>
+            <textarea
+              placeholder="Include as much detail as possible:"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              rows="5"
+            />
+
             <div className="ct-row">
               <div className="ct-field">
                 <label>Problem Category</label>
@@ -125,14 +183,6 @@ function CreateTicket() {
                 </div>
               </div>
             </div>
-
-            <label>Detailed Description</label>
-            <textarea
-              placeholder="Include as much detail as possible:"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows="5"
-            />
 
             <label>Attachments</label>
             <div className="ct-dropzone" onClick={() => document.getElementById("fileInput").click()}>

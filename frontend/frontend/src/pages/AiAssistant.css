@@ -1,0 +1,150 @@
+.ai-page {
+  padding: 40px 20px;
+  background: var(--bg);
+  min-height: calc(100vh - 200px);
+  display: flex;
+  justify-content: center;
+}
+
+.ai-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+}
+
+.ai-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  color: var(--primary-dark);
+}
+
+.ai-header h2 {
+  font-size: 16px;
+  color: var(--text);
+}
+
+.ai-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ai-bubble-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ai-bubble-row.user {
+  flex-direction: row-reverse;
+}
+
+.ai-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ai-avatar.user {
+  background: var(--text-muted);
+}
+
+.ai-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.ai-bubble.ai {
+  background: var(--bg);
+  color: var(--text);
+  border-bottom-left-radius: 2px;
+}
+
+.ai-bubble.user {
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: 2px;
+}
+
+.ai-typing {
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.ai-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+}
+
+.ai-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.ai-input-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.ai-input-row button {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.ai-input-row button:hover {
+  background: var(--primary-dark);
+}
+
+.ai-input-row button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ai-footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 10px 18px 18px;
+}
+
+.ai-footer-note a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}

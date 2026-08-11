@@ -17,6 +17,7 @@ function Navbar() {
         <Link to="/dashboard">Home</Link>
         <Link to="/tickets">Tickets</Link>
         <Link to="/reports">Reports</Link>
+        <Link to="/ai-assistant">AI Assistant</Link>
       </div>
 
       <div className="app-nav-icons">
