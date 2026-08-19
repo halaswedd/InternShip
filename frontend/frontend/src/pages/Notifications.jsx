@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import "./Notifications.css";
 
 function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -12,15 +13,12 @@ function Notifications() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(
-          "http://localhost/InternShip/backend/get_notifications.php",
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch("http://localhost/InternShip/backend/get_notifications.php", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const data = await response.json();
 
@@ -46,17 +44,14 @@ function Notifications() {
     );
 
     try {
-      await fetch(
-        "http://localhost/InternShip/backend/mark_notification_read.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ notification_id: notificationId }),
-        }
-      );
+      await fetch("http://localhost/InternShip/backend/mark_notification_read.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ notification_id: notificationId }),
+      });
     } catch (error) {
       console.error("Error marking notification as read:", error);
     }
@@ -72,63 +67,32 @@ function Notifications() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-
-      <div style={{ padding: "40px" }}>
+      <div className="nt-page">
         <h2>Notifications</h2>
 
         {loading ? (
-          <p>Loading notifications...</p>
+          <p className="nt-muted">Loading notifications...</p>
         ) : notifications.length === 0 ? (
-          <p style={{ color: "gray" }}>No notifications yet.</p>
+          <p className="nt-muted">No notifications yet.</p>
         ) : (
           notifications.map((notification) => (
             <div
               key={notification.id}
               onClick={() => handleNotificationClick(notification)}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "15px",
-                marginBottom: "15px",
-                background: "#fff",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-                cursor: notification.ticket_id ? "pointer" : "default",
-              }}
+              className={`nt-item ${notification.ticket_id ? "clickable" : ""}`}
             >
-              <h4 style={{ margin: 0 }}>{notification.message}</h4>
-
-              <p
-                style={{
-                  marginTop: "8px",
-                  color: "#666",
-                  fontSize: "13px",
-                }}
-              >
-                {notification.created_at}
-              </p>
-
-              {notification.is_read == 0 && (
-                <span
-                  style={{
-                    display: "inline-block",
-                    marginTop: "8px",
-                    background: "#007bff",
-                    color: "#fff",
-                    padding: "4px 10px",
-                    borderRadius: "20px",
-                    fontSize: "12px",
-                  }}
-                >
-                  New
-                </span>
-              )}
+              <h4 className={notification.is_read == 0 ? "unread" : ""}>
+                {notification.message}
+              </h4>
+              <p className="nt-time">{new Date(notification.created_at).toLocaleString()}</p>
+              {notification.is_read == 0 && <span className="nt-new-badge">New</span>}
             </div>
           ))
         )}
       </div>
-    </div>
+    </>
   );
 }
 

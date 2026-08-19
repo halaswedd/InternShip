@@ -225,14 +225,163 @@ th {
 .lp-footer-links a:hover { color: var(--primary); }
 
 @media (max-width: 900px) {
+  .rp-page {
+    padding: 24px 20px 35px;
+  }
+
   .rp-row {
     grid-template-columns: 1fr;
   }
+
   .rp-widgets {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
+
   .rp-header {
     flex-direction: column;
+    align-items: stretch;
     gap: 12px;
+  }
+
+  .rp-header h2 {
+    font-size: 21px;
+  }
+
+  .rp-export-buttons {
+    width: 100%;
+  }
+
+  .rp-export-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .rp-panel {
+    padding: 16px;
+  }
+
+  .rp-chart-svg {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .rp-page {
+    padding: 18px 12px 30px;
+  }
+
+  .rp-widgets {
+    grid-template-columns: 1fr;
+  }
+
+  .rp-widget {
+    padding: 14px;
+  }
+
+  .rp-widget-number {
+    font-size: 22px;
+  }
+
+  .rp-panel {
+    padding: 14px;
+    overflow: hidden;
+  }
+
+  .rp-panel h3 {
+    font-size: 14px;
+  }
+
+  .rp-export-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rp-export-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .rp-chart-panel {
+    overflow-x: auto;
+    width: 100%;
+    align-items: center;
+  }
+
+  .rp-chart-svg {
+    min-width: 480px;
+  }
+
+  .rp-performer-row {
+    gap: 8px;
+  }
+
+  .rp-performer-name {
+    font-size: 12px;
+  }
+
+  .rp-performer-count {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  /* Reports table */
+  .rp-panel table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  th {
+    font-size: 10px;
+  }
+
+  .rp-status-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .rp-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .rp-page {
+    padding: 14px 8px 25px;
+  }
+
+  .rp-panel {
+    padding: 12px;
+  }
+
+  .rp-chart-svg {
+    min-width: 420px;
+  }
+
+  .rp-footer {
+    padding: 18px 10px;
+  }
+
+  .lp-footer-links {
+    flex-direction: column;
+    gap: 8px;
   }
 }

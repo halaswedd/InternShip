@@ -270,3 +270,134 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+@media (max-width: 768px) {
+  .ct-page {
+    padding: 20px 12px 30px;
+    min-height: calc(100vh - 150px);
+  }
+
+  .ct-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+
+  .ct-card h2 {
+    font-size: 21px;
+  }
+
+  .ct-subtitle {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  .ct-card form input,
+  .ct-card form select,
+  .ct-card form textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 13px;
+  }
+
+  .ct-row {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .ct-field {
+    width: 100%;
+  }
+
+  .ct-priority-pills {
+    width: 100%;
+  }
+
+  .ct-pill {
+    padding: 10px 3px;
+    font-size: 11px;
+  }
+
+  .ct-dropzone {
+    padding: 24px 12px;
+  }
+
+  .ct-dropzone p {
+    font-size: 12px;
+  }
+
+  .ct-label-row {
+    gap: 8px;
+    align-items: center;
+  }
+
+  .ct-label-row label {
+    font-size: 12px;
+  }
+
+  .ct-ai-btn {
+    padding: 5px 9px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .ct-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .ct-cancel,
+  .ct-submit {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 10px 16px;
+  }
+
+  .ct-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .ct-page {
+    padding: 14px 8px 25px;
+  }
+
+  .ct-card {
+    padding: 17px 12px;
+  }
+
+  .ct-card h2 {
+    font-size: 19px;
+  }
+
+  .ct-priority-pills {
+    flex-wrap: wrap;
+  }
+
+  .ct-pill {
+    min-width: 50%;
+  }
+
+  .ct-ai-btn {
+    font-size: 9px;
+    padding: 5px 7px;
+  }
+
+  .ct-footer {
+    padding: 18px 10px;
+  }
+}

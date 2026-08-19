@@ -301,10 +301,151 @@
 }
 
 @media (max-width: 768px) {
+  .db-page {
+    padding: 20px 12px 30px;
+  }
+
+  .db-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .db-header h2 {
+    font-size: 21px;
+  }
+
+  .db-header p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .db-create-btn {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .db-widgets {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .db-widget {
+    padding: 15px;
+  }
+
+  .db-widget-number {
+    font-size: 23px;
+  }
+
   .db-charts-row {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .db-widgets {
+
+  .db-panel {
+    padding: 15px;
+    overflow: hidden;
+  }
+
+  .db-panel h3 {
+    font-size: 14px;
+  }
+
+  .db-donut-row {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .db-donut {
+    width: 110px;
+    height: 110px;
+  }
+
+  .db-legend {
+    width: 100%;
+  }
+
+  .db-legend-row {
+    font-size: 12px;
+  }
+
+  /* Recent tickets table */
+  .db-recent-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .db-recent-table th,
+  .db-recent-table td {
+    padding: 9px 8px;
+    font-size: 11px;
+  }
+
+  .db-status-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .db-priority-row {
+    margin-bottom: 12px;
+  }
+
+  .db-priority-top {
+    font-size: 12px;
+  }
+
+  .db-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .db-page {
+    padding: 14px 8px 25px;
+  }
+
+  .db-panel {
+    padding: 12px;
+  }
+
+  .db-header h2 {
+    font-size: 19px;
+  }
+
+  .db-widget-number {
+    font-size: 21px;
+  }
+
+  .db-donut {
+    width: 100px;
+    height: 100px;
+  }
+
+  .db-recent-table th,
+  .db-recent-table td {
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+
+  .lp-footer-links {
+    flex-direction: column;
+    gap: 8px;
   }
 }

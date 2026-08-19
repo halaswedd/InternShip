@@ -390,3 +390,177 @@
   border-color: var(--primary);
   color: var(--primary-dark);
 }
+
+@media (max-width: 768px) {
+  .td-page {
+    padding: 18px 12px 35px;
+  }
+
+  .td-top-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .td-close-btn,
+  .td-resolve-btn {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10px 16px;
+  }
+
+  .td-card {
+    padding: 18px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .td-page > .td-card {
+    max-width: 100%;
+  }
+
+  .td-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    max-width: 100%;
+  }
+
+  .td-header-card {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .td-header-left {
+    width: 100%;
+  }
+
+  .td-header-left h2 {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .td-meta {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+
+  .td-tags {
+    flex-wrap: wrap;
+  }
+
+  .td-requester {
+    align-items: flex-start;
+  }
+
+  .td-requester-name {
+    font-size: 13px;
+  }
+
+  .td-requester-email {
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .td-description {
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .td-comment-form textarea {
+    width: 100%;
+    min-height: 100px;
+    box-sizing: border-box;
+  }
+
+  .td-comment-form button {
+    width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+    padding: 10px 16px;
+  }
+
+  .td-comment {
+    gap: 9px;
+  }
+
+  .td-comment .td-description {
+    overflow-wrap: anywhere;
+  }
+
+  .td-attachments-header {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .td-download-all {
+    font-size: 11px;
+  }
+
+  .td-attachments-grid {
+    gap: 8px;
+  }
+
+  .td-attachment-item {
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+  }
+
+  .td-error,
+  .td-success {
+    font-size: 12px;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+
+  .td-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .td-page {
+    padding: 14px 8px 28px;
+  }
+
+  .td-card {
+    padding: 14px;
+  }
+
+  .td-header-left h2 {
+    font-size: 15px;
+  }
+
+  .td-avatar.small {
+    width: 36px;
+    height: 36px;
+  }
+
+  .td-description {
+    font-size: 11px;
+  }
+
+  .td-attachment-item {
+    width: 100%;
+  }
+
+  .td-footer {
+    padding: 18px 10px;
+  }
+
+  .lp-footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

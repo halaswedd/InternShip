@@ -275,47 +275,138 @@ td {
 
 @media (max-width: 768px) {
   .tl-content {
-    padding: 20px 16px;
+    padding: 20px 12px 30px;
   }
 
   .tl-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 12px;
   }
 
+  .tl-header h2 {
+    font-size: 21px;
+  }
+
+  .tl-header p {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
   .tl-create-btn {
-    align-self: stretch;
+    width: 100%;
+    box-sizing: border-box;
     text-align: center;
   }
 
   .tl-filters {
     flex-direction: column;
+    gap: 9px;
+    padding: 10px;
   }
 
   .tl-search {
     width: 100%;
+    min-width: 0;
     box-sizing: border-box;
+  }
+
+  .tl-search input {
+    min-width: 0;
+    width: 100%;
   }
 
   .tl-filters select {
     width: 100%;
+    min-width: 0;
     box-sizing: border-box;
   }
 
-  
   .tl-table-wrapper {
+    width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  table {
+  .tl-table-wrapper table {
     min-width: 700px;
+  }
+
+  th {
+    padding: 10px 12px;
+    font-size: 10px;
+  }
+
+  td {
+    padding: 11px 12px;
+    font-size: 12px;
   }
 
   .tl-pagination {
     flex-direction: column;
     gap: 10px;
-    align-items: flex-start;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .tl-pagination div {
+    justify-content: center;
+  }
+
+  .tl-pagination button {
+    padding: 7px 12px;
+  }
+
+  .tl-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .tl-content {
+    padding: 15px 8px 25px;
+  }
+
+  .tl-header h2 {
+    font-size: 19px;
+  }
+
+  .tl-filters {
+    padding: 8px;
+  }
+
+  .tl-table-wrapper table {
+    min-width: 650px;
+  }
+
+  .tl-pagination {
+    font-size: 11px;
+  }
+
+  .tl-pagination div {
+    gap: 5px;
+  }
+
+  .tl-pagination button {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .tl-footer {
+    padding: 18px 10px;
+  }
+
+  .lp-footer-links {
+    flex-direction: column;
+    gap: 8px;
   }
 }

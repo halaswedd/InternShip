@@ -33,7 +33,7 @@ const ResetPassword = () => {
 
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/reset_password.php",
+        "/backend/reset_password.php",
         {
           method: "POST",
           headers: {

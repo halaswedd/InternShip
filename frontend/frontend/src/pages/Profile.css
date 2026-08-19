@@ -252,3 +252,129 @@
 .lp-footer-links { display: flex; gap: 20px; }
 .lp-footer-links a { color: var(--text-muted); text-decoration: none; font-size: 12px; }
 .lp-footer-links a:hover { color: var(--primary); }
+
+@media (max-width: 768px) {
+  .pf-page {
+    padding: 25px 14px 30px;
+    min-height: calc(100vh - 150px);
+  }
+
+  .pf-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 24px 18px;
+    box-sizing: border-box;
+  }
+
+  .pf-header {
+    gap: 12px;
+  }
+
+  .pf-avatar {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+
+  .pf-header h2 {
+    font-size: 17px;
+  }
+
+  .pf-info-row {
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .pf-info-value {
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  .pf-change-pw-btn,
+  .pf-logout-btn {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  /* Modal */
+  .pf-modal-overlay {
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .pf-modal {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 22px 18px;
+    box-sizing: border-box;
+  }
+
+  .pf-modal-header h3 {
+    font-size: 15px;
+  }
+
+  .pf-password-form input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pf-save-btn {
+    width: 100%;
+  }
+
+  .pf-footer {
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .lp-footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .pf-page {
+    padding: 18px 9px 25px;
+  }
+
+  .pf-card {
+    padding: 20px 14px;
+  }
+
+  .pf-header {
+    gap: 10px;
+  }
+
+  .pf-avatar {
+    width: 46px;
+    height: 46px;
+    font-size: 16px;
+  }
+
+  .pf-header h2 {
+    font-size: 16px;
+  }
+
+  .pf-role-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .pf-info-value {
+    font-size: 12px;
+  }
+
+  .pf-modal {
+    padding: 20px 14px;
+  }
+
+  .lp-footer-links {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

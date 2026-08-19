@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Bell } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function NotificationBell() {
   const [notifications, setNotifications] = useState([]);
@@ -9,6 +8,7 @@ function NotificationBell() {
 
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
+
   useEffect(() => {
     loadNotifications();
 
@@ -55,13 +55,12 @@ function NotificationBell() {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () =>
-      document.removeEventListener(
-        "mousedown",
-        handleClickOutside
-      );
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const unread = notifications.filter((n) => n.is_read == 0).length;
+  const unread = notifications.filter(
+    (n) => n.is_read == 0
+  ).length;
 
   return (
     <div
@@ -74,15 +73,15 @@ function NotificationBell() {
         onClick={() => setOpen(!open)}
         className="icon-btn"
         style={{
-            position: "relative",
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            padding: "8px",
-            borderRadius: "50%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+          position: "relative",
+          border: "none",
+          background: "transparent",
+          cursor: "pointer",
+          padding: "8px",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Bell size={26} strokeWidth={2.2} />
@@ -115,7 +114,11 @@ function NotificationBell() {
             position: "absolute",
             top: "45px",
             right: 0,
-            width: "320px",
+
+            // Responsive width
+            width: "min(320px, calc(100vw - 32px))",
+            maxWidth: "calc(100vw - 32px)",
+
             background: "#fff",
             borderRadius: "10px",
             boxShadow: "0 8px 20px rgba(0,0,0,.15)",
@@ -134,77 +137,101 @@ function NotificationBell() {
           </div>
 
           {notifications.length === 0 ? (
-            <div style={{ padding: 15 }}>
+            <div
+              style={{
+                padding: 15,
+                fontSize: "13px",
+              }}
+            >
               No notifications
             </div>
           ) : (
             notifications.slice(0, 5).map((notification) => (
-                <div
-                    key={notification.id}
-                    onClick={async () => {
-                    const token = localStorage.getItem("token");
+              <div
+                key={notification.id}
+                onClick={async () => {
+                  const token = localStorage.getItem("token");
 
+                  try {
                     await fetch(
-                        "http://localhost/InternShip/backend/mark_notification_read.php",
-                        {
+                      "http://localhost/InternShip/backend/mark_notification_read.php",
+                      {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${token}`,
+                          "Content-Type": "application/json",
+                          Authorization: `Bearer ${token}`,
                         },
                         body: JSON.stringify({
-                         notification_id: notification.id,
+                          notification_id: notification.id,
                         }),
-                        }
+                      }
                     );
+
                     loadNotifications();
 
                     if (notification.ticket_id) {
-                    navigate(`/tickets/${notification.ticket_id}`);
+                      navigate(
+                        `/tickets/${notification.ticket_id}`
+                      );
                     }
+                  } catch (error) {
+                    console.error(
+                      "Error marking notification as read:",
+                      error
+                    );
+                  }
+                }}
+                style={{
+                  padding: "15px",
+                  borderBottom: "1px solid #eee",
+                  cursor: "pointer",
+                  background:
+                    notification.is_read == 0
+                      ? "#eef6ff"
+                      : "#fff",
 
-                    loadNotifications();
-                    }}
-                    style={{
-                    padding: "15px",
-                    borderBottom: "1px solid #eee",
-                    cursor: "pointer",
-                    background:
-                        notification.is_read == 0
-                        ? "#eef6ff"
-                        : "#fff",
-                    }}
+                  // Prevent long text from breaking layout
+                  wordBreak: "break-word",
+                  overflowWrap: "anywhere",
+                }}
+              >
+                <div
+                  style={{
+                    fontWeight:
+                      notification.is_read == 0
+                        ? "bold"
+                        : "normal",
+                    fontSize: "13px",
+                    lineHeight: "1.5",
+                  }}
                 >
-                    <div
-                    style={{
-                        fontWeight:
-                        notification.is_read == 0
-                            ? "bold"
-                            : "normal",
-                    }}
-                    >
-                    {notification.message}
-                    </div>
-
-                    <small
-                    style={{
-                        color: "#888",
-                    }}
-                    >
-                    {notification.created_at}
-                    </small>
+                  {notification.message}
                 </div>
+
+                <small
+                  style={{
+                    color: "#888",
+                    fontSize: "11px",
+                    display: "block",
+                    marginTop: "5px",
+                  }}
+                >
+                  {notification.created_at}
+                </small>
+              </div>
             ))
           )}
 
           <Link
             to="/notifications"
+            onClick={() => setOpen(false)}
             style={{
               display: "block",
               textAlign: "center",
               padding: "15px",
               textDecoration: "none",
               fontWeight: "bold",
+              fontSize: "13px",
             }}
           >
             View All
