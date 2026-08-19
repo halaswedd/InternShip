@@ -6,8 +6,12 @@ import "./AiAssistant.css";
 
 function AiAssistant() {
   const [messages, setMessages] = useState([
-    { role: "ai", text: "Hi! I'm your IT assistant. Ask me anything before opening a support ticket — I might be able to help right away." }
+    {
+      role: "ai",
+      text: "Hi! I'm your IT assistant. Ask me anything before opening a support ticket — I might be able to help right away.",
+    },
   ]);
+
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef(null);
@@ -21,25 +25,47 @@ function AiAssistant() {
     if (!input.trim() || loading) return;
 
     const userMessage = input.trim();
-    setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
+
+    setMessages((prev) => [
+      ...prev,
+      { role: "user", text: userMessage },
+    ]);
+
     setInput("");
     setLoading(true);
 
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch("http://localhost/InternShip/backend/ai_chat.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ message: userMessage }),
-      });
+      const response = await fetch(
+        "https://affectionate-freedom-production-e166.up.railway.app/ai_chat.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ message: userMessage }),
+        }
+      );
+
       const data = await response.json();
-      setMessages((prev) => [...prev, { role: "ai", text: data.reply || "Sorry, something went wrong." }]);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          text: data.reply || "Sorry, something went wrong.",
+        },
+      ]);
     } catch (err) {
-      setMessages((prev) => [...prev, { role: "ai", text: "Something went wrong. Please try again." }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          text: "Something went wrong. Please try again.",
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -48,6 +74,7 @@ function AiAssistant() {
   return (
     <>
       <Navbar />
+
       <div className="ai-page">
         <div className="ai-card">
           <div className="ai-header">
@@ -58,17 +85,36 @@ function AiAssistant() {
           <div className="ai-messages">
             {messages.map((m, i) => (
               <div key={i} className={`ai-bubble-row ${m.role}`}>
-                {m.role === "ai" && <div className="ai-avatar"><Sparkles size={14} /></div>}
-                <div className={`ai-bubble ${m.role}`}>{m.text}</div>
-                {m.role === "user" && <div className="ai-avatar user"><User size={14} /></div>}
+                {m.role === "ai" && (
+                  <div className="ai-avatar">
+                    <Sparkles size={14} />
+                  </div>
+                )}
+
+                <div className={`ai-bubble ${m.role}`}>
+                  {m.text}
+                </div>
+
+                {m.role === "user" && (
+                  <div className="ai-avatar user">
+                    <User size={14} />
+                  </div>
+                )}
               </div>
             ))}
+
             {loading && (
               <div className="ai-bubble-row ai">
-                <div className="ai-avatar"><Sparkles size={14} /></div>
-                <div className="ai-bubble ai ai-typing">Typing...</div>
+                <div className="ai-avatar">
+                  <Sparkles size={14} />
+                </div>
+
+                <div className="ai-bubble ai ai-typing">
+                  Typing...
+                </div>
               </div>
             )}
+
             <div ref={bottomRef}></div>
           </div>
 
@@ -79,13 +125,17 @@ function AiAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
+
             <button type="submit" disabled={loading}>
               <Send size={16} />
             </button>
           </form>
 
           <p className="ai-footer-note">
-            Still need help? <Link to="/create-ticket">Create a support ticket</Link>
+            Still need help?{" "}
+            <Link to="/create-ticket">
+              Create a support ticket
+            </Link>
           </p>
         </div>
       </div>

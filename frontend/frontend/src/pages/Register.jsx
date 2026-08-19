@@ -28,11 +28,14 @@ function Register() {
     }
 
     try {
-      const response = await fetch("http://localhost/InternShip/backend/register.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
+      const response = await fetch(
+        "https://affectionate-freedom-production-e166.up.railway.app/register.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        }
+      );
 
       const data = await response.json();
 
@@ -43,9 +46,11 @@ function Register() {
         setError(data.message);
       }
     } catch (err) {
-  console.error(err);
-  setError(err.message || "Something went wrong. Please try again.");
-}
+      console.error(err);
+      setError(
+        err.message || "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -56,6 +61,7 @@ function Register() {
 
           <form onSubmit={handleRegister}>
             <label>Full Name</label>
+
             <input
               type="text"
               placeholder="Enter your full name"
@@ -65,6 +71,7 @@ function Register() {
             />
 
             <label>Email Address</label>
+
             <input
               type="email"
               placeholder="Enter your email address"
@@ -76,6 +83,7 @@ function Register() {
             <div className="password-row">
               <div className="password-field">
                 <label>Password</label>
+
                 <input
                   type="password"
                   placeholder="••••••••"
@@ -84,13 +92,17 @@ function Register() {
                   required
                 />
               </div>
+
               <div className="password-field">
                 <label>Confirm Password</label>
+
                 <input
                   type="password"
                   placeholder="••••••••"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) =>
+                    setConfirmPassword(e.target.value)
+                  }
                   required
                 />
               </div>
@@ -102,28 +114,51 @@ function Register() {
                 checked={agreed}
                 onChange={(e) => setAgreed(e.target.checked)}
               />
+
               <span>
-                I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>.
+                I agree to the{" "}
+                <a href="#">Terms and Conditions</a> and{" "}
+                <a href="#">Privacy Policy</a>.
               </span>
             </label>
 
-            <button type="submit" className="register-btn">Register</button>
+            <button
+              type="submit"
+              className="register-btn"
+            >
+              Register
+            </button>
           </form>
 
-          {error && <p className="register-error">{error}</p>}
-          {success && <p className="register-success">{success}</p>}
+          {error && (
+            <p className="register-error">{error}</p>
+          )}
+
+          {success && (
+            <p className="register-success">{success}</p>
+          )}
 
           <p className="signin-link">
-            Already have an account? <Link to="/login">Sign in</Link>
+            Already have an account?{" "}
+            <Link to="/login">Sign in</Link>
           </p>
         </div>
       </div>
 
       <footer className="register-footer">
         <div className="lp-footer-left">
-          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
-          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+          <span className="lp-footer-brand">
+            IT
+            <span className="lp-footer-brand-accent">
+              HelpDesk
+            </span>
+          </span>
+
+          <span className="lp-footer-copy">
+            © 2026 HelpDesk. All rights reserved.
+          </span>
         </div>
+
         <div className="lp-footer-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>

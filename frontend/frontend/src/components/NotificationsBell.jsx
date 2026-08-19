@@ -24,7 +24,7 @@ function NotificationBell() {
 
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/get_notifications.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/get_notifications.php",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -154,7 +154,7 @@ function NotificationBell() {
 
                   try {
                     await fetch(
-                      "http://localhost/InternShip/backend/mark_notification_read.php",
+                      "https://affectionate-freedom-production-e166.up.railway.app/mark_notification_read.php",
                       {
                         method: "POST",
                         headers: {

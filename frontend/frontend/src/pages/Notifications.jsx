@@ -13,12 +13,15 @@ function Notifications() {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch("http://localhost/InternShip/backend/get_notifications.php", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://affectionate-freedom-production-e166.up.railway.app/get_notifications.php",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = await response.json();
 
@@ -44,14 +47,19 @@ function Notifications() {
     );
 
     try {
-      await fetch("http://localhost/InternShip/backend/mark_notification_read.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ notification_id: notificationId }),
-      });
+      await fetch(
+        "https://affectionate-freedom-production-e166.up.railway.app/mark_notification_read.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            notification_id: notificationId,
+          }),
+        }
+      );
     } catch (error) {
       console.error("Error marking notification as read:", error);
     }
@@ -61,6 +69,7 @@ function Notifications() {
     if (notification.is_read == 0) {
       markAsRead(notification.id);
     }
+
     if (notification.ticket_id) {
       navigate(`/tickets/${notification.ticket_id}`);
     }
@@ -69,6 +78,7 @@ function Notifications() {
   return (
     <>
       <Navbar />
+
       <div className="nt-page">
         <h2>Notifications</h2>
 
@@ -81,13 +91,25 @@ function Notifications() {
             <div
               key={notification.id}
               onClick={() => handleNotificationClick(notification)}
-              className={`nt-item ${notification.ticket_id ? "clickable" : ""}`}
+              className={`nt-item ${
+                notification.ticket_id ? "clickable" : ""
+              }`}
             >
-              <h4 className={notification.is_read == 0 ? "unread" : ""}>
+              <h4
+                className={
+                  notification.is_read == 0 ? "unread" : ""
+                }
+              >
                 {notification.message}
               </h4>
-              <p className="nt-time">{new Date(notification.created_at).toLocaleString()}</p>
-              {notification.is_read == 0 && <span className="nt-new-badge">New</span>}
+
+              <p className="nt-time">
+                {new Date(notification.created_at).toLocaleString()}
+              </p>
+
+              {notification.is_read == 0 && (
+                <span className="nt-new-badge">New</span>
+              )}
             </div>
           ))
         )}

@@ -15,13 +15,17 @@ function ForgotPassword() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost/InternShip/backend/forgot_password.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+      const response = await fetch(
+        "https://affectionate-freedom-production-e166.up.railway.app/forgot_password.php",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        }
+      );
 
       const data = await response.json();
+
       if (data.success) {
         setMessage(data.message);
         setEmail("");
@@ -30,7 +34,9 @@ function ForgotPassword() {
       }
     } catch (err) {
       console.error(err);
-     setError(err.message || "Something went wrong. Please try again.");
+      setError(
+        err.message || "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -41,12 +47,15 @@ function ForgotPassword() {
       <div className="forgot-page-content">
         <div className="forgot-card">
           <h2>Reset Your Password</h2>
+
           <p className="forgot-subtitle">
-            Enter your email address below and we'll send you a link to reset your password.
+            Enter your email address below and we'll send you a link to reset
+            your password.
           </p>
 
           <form onSubmit={handleSubmit}>
             <label>Email Address</label>
+
             <input
               type="email"
               placeholder="Enter your email"
@@ -55,27 +64,46 @@ function ForgotPassword() {
               required
             />
 
-            <button type="submit" className="forgot-btn" disabled={loading}>
+            <button
+              type="submit"
+              className="forgot-btn"
+              disabled={loading}
+            >
               {loading ? "Sending..." : "Send Reset Link →"}
             </button>
           </form>
 
-          {message && <p className="forgot-success">{message}</p>}
-          {error && <p className="forgot-error">{error}</p>}
+          {message && (
+            <p className="forgot-success">{message}</p>
+          )}
+
+          {error && (
+            <p className="forgot-error">{error}</p>
+          )}
 
           <div className="forgot-divider"></div>
 
           <p className="back-link">
-            Remembered your password? <Link to="/login">Back to Login</Link>
+            Remembered your password?{" "}
+            <Link to="/login">Back to Login</Link>
           </p>
         </div>
       </div>
 
       <footer className="forgot-footer">
         <div className="lp-footer-left">
-          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
-          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+          <span className="lp-footer-brand">
+            IT
+            <span className="lp-footer-brand-accent">
+              HelpDesk
+            </span>
+          </span>
+
+          <span className="lp-footer-copy">
+            © 2026 HelpDesk. All rights reserved.
+          </span>
         </div>
+
         <div className="lp-footer-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>

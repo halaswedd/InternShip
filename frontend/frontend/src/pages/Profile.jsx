@@ -13,7 +13,12 @@ const ROLE_NAMES = {
 
 function initials(name) {
   if (!name) return "?";
-  return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 }
 
 function Profile() {
@@ -47,15 +52,23 @@ function Profile() {
     setPwSuccess("");
 
     try {
-      const response = await fetch("http://localhost/InternShip/backend/change_password.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
-        },
-        body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
-      });
+      const response = await fetch(
+        "https://affectionate-freedom-production-e166.up.railway.app/change_password.php",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            current_password: currentPassword,
+            new_password: newPassword,
+          }),
+        }
+      );
+
       const data = await response.json();
+
       if (data.success) {
         setPwSuccess("Password changed successfully!");
         setCurrentPassword("");
@@ -71,13 +84,24 @@ function Profile() {
   return (
     <>
       <Navbar />
+
       <div className="pf-page">
         <div className="pf-card">
           <div className="pf-header">
-            <div className="pf-avatar">{initials(user?.name)}</div>
+            <div className="pf-avatar">
+              {initials(user?.name)}
+            </div>
+
             <div>
               <h2>{user?.name}</h2>
-              <span className={`pf-role-badge role-${(ROLE_NAMES[user?.role_id] || "").toLowerCase().replace(" ", "-")}`}>
+
+              <span
+                className={`pf-role-badge role-${(
+                  ROLE_NAMES[user?.role_id] || ""
+                )
+                  .toLowerCase()
+                  .replace(" ", "-")}`}
+              >
                 {ROLE_NAMES[user?.role_id] || "User"}
               </span>
             </div>
@@ -87,6 +111,7 @@ function Profile() {
 
           <div className="pf-info-row">
             <Mail size={16} />
+
             <div>
               <p className="pf-info-label">Email</p>
               <p className="pf-info-value">{user?.email}</p>
@@ -95,14 +120,18 @@ function Profile() {
 
           <div className="pf-info-row">
             <ShieldCheck size={16} />
+
             <div>
               <p className="pf-info-label">Role</p>
-              <p className="pf-info-value">{ROLE_NAMES[user?.role_id] || "User"}</p>
+              <p className="pf-info-value">
+                {ROLE_NAMES[user?.role_id] || "User"}
+              </p>
             </div>
           </div>
 
           <div className="pf-info-row">
             <User size={16} />
+
             <div>
               <p className="pf-info-label">User ID</p>
               <p className="pf-info-value">#{user?.id}</p>
@@ -111,48 +140,86 @@ function Profile() {
 
           <div className="pf-divider"></div>
 
-          <button className="pf-change-pw-btn" onClick={() => setShowModal(true)}>
+          <button
+            className="pf-change-pw-btn"
+            onClick={() => setShowModal(true)}
+          >
             <Lock size={16} /> Change Password
           </button>
 
-          <button className="pf-logout-btn" onClick={handleLogout}>
+          <button
+            className="pf-logout-btn"
+            onClick={handleLogout}
+          >
             <LogOut size={16} /> Logout
           </button>
         </div>
       </div>
 
       {showModal && (
-        <div className="pf-modal-overlay" onClick={closeModal}>
-          <div className="pf-modal" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="pf-modal-overlay"
+          onClick={closeModal}
+        >
+          <div
+            className="pf-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="pf-modal-header">
-              <h3><Lock size={16} /> Change Password</h3>
-              <button className="pf-modal-close" onClick={closeModal}>
+              <h3>
+                <Lock size={16} /> Change Password
+              </h3>
+
+              <button
+                className="pf-modal-close"
+                onClick={closeModal}
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleChangePassword} className="pf-password-form">
+            <form
+              onSubmit={handleChangePassword}
+              className="pf-password-form"
+            >
               <label>Current Password</label>
+
               <input
                 type="password"
                 placeholder="Enter current password"
                 value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
+                onChange={(e) =>
+                  setCurrentPassword(e.target.value)
+                }
                 required
               />
+
               <label>New Password</label>
+
               <input
                 type="password"
                 placeholder="Enter new password"
                 value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={(e) =>
+                  setNewPassword(e.target.value)
+                }
                 required
               />
 
-              {pwError && <p className="pf-pw-error">{pwError}</p>}
-              {pwSuccess && <p className="pf-pw-success">{pwSuccess}</p>}
+              {pwError && (
+                <p className="pf-pw-error">{pwError}</p>
+              )}
 
-              <button type="submit" className="pf-save-btn">Update Password</button>
+              {pwSuccess && (
+                <p className="pf-pw-success">{pwSuccess}</p>
+              )}
+
+              <button
+                type="submit"
+                className="pf-save-btn"
+              >
+                Update Password
+              </button>
             </form>
           </div>
         </div>
@@ -160,9 +227,18 @@ function Profile() {
 
       <footer className="pf-footer">
         <div className="lp-footer-left">
-          <span className="lp-footer-brand">IT<span className="lp-footer-brand-accent">HelpDesk</span></span>
-          <span className="lp-footer-copy">© 2026 HelpDesk. All rights reserved.</span>
+          <span className="lp-footer-brand">
+            IT
+            <span className="lp-footer-brand-accent">
+              HelpDesk
+            </span>
+          </span>
+
+          <span className="lp-footer-copy">
+            © 2026 HelpDesk. All rights reserved.
+          </span>
         </div>
+
         <div className="lp-footer-links">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>

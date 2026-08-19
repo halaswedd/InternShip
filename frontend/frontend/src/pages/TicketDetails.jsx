@@ -6,7 +6,12 @@ import "./TicketDetails.css";
 
 function initials(name) {
   if (!name) return "?";
-  return name.split(" ").map((n) => n[0]).join("").toUpperCase().slice(0, 2);
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
 }
 
 function TicketDetails() {
@@ -29,12 +34,12 @@ function TicketDetails() {
   const fetchTicket = async () => {
     try {
       const response = await fetch(
-        `http://localhost/InternShip/backend/get_ticket.php?id=${id}`,
+        `https://affectionate-freedom-production-e166.up.railway.app/get_ticket.php?id=${id}`,
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -60,12 +65,12 @@ function TicketDetails() {
   const fetchAgents = async () => {
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/get_agents.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/get_agents.php",
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -82,12 +87,12 @@ function TicketDetails() {
   const fetchComments = async () => {
     try {
       const response = await fetch(
-        `http://localhost/InternShip/backend/get_comments.php?ticket_id=${id}`,
+        `https://affectionate-freedom-production-e166.up.railway.app/get_comments.php?ticket_id=${id}`,
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -104,12 +109,12 @@ function TicketDetails() {
   const fetchAttachments = async () => {
     try {
       const response = await fetch(
-        `http://localhost/InternShip/backend/get_attachments.php?ticket_id=${id}`,
+        `https://affectionate-freedom-production-e166.up.railway.app/get_attachments.php?ticket_id=${id}`,
         {
           method: "GET",
           headers: {
-            "Authorization": `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -138,12 +143,12 @@ function TicketDetails() {
 
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/update_ticket.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/update_ticket.php",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             ticket_id: id,
@@ -175,16 +180,16 @@ function TicketDetails() {
 
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/assign_ticket.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/assign_ticket.php",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             ticket_id: id,
-            agent_id: agentId
+            agent_id: agentId,
           }),
         }
       );
@@ -211,16 +216,16 @@ function TicketDetails() {
 
     try {
       const response = await fetch(
-        "http://localhost/InternShip/backend/add_comment.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/add_comment.php",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             ticket_id: id,
-            comment: newComment
+            comment: newComment,
           }),
         }
       );
@@ -261,7 +266,6 @@ function TicketDetails() {
       <Navbar />
 
       <div className="td-page">
-
         <div className="td-top-actions">
           <button
             className="td-close-btn"
@@ -280,7 +284,6 @@ function TicketDetails() {
 
         <div className="td-card td-header-card">
           <div className="td-header-left">
-
             <div className="td-tags">
               <span className="td-ref-tag">
                 {ticket.reference_no}
@@ -302,21 +305,22 @@ function TicketDetails() {
             <h2>{ticket.title}</h2>
 
             <p className="td-meta">
-              Reported {new Date(ticket.created_at).toLocaleString()} by{" "}
+              Reported{" "}
+              {new Date(ticket.created_at).toLocaleString()} by{" "}
               {ticket.requested_by || "Unknown"}
             </p>
-
           </div>
 
-          <div className="td-avatar" title={ticket.requested_by}>
+          <div
+            className="td-avatar"
+            title={ticket.requested_by}
+          >
             {initials(ticket.requested_by)}
           </div>
         </div>
 
         <div className="td-row">
-
           <div className="td-card">
-
             <h4>REQUESTER</h4>
 
             <div className="td-requester">
@@ -345,7 +349,9 @@ function TicketDetails() {
               value={statusId}
               onChange={(e) => {
                 setStatusId(e.target.value);
-                updateTicket({ status_id: e.target.value });
+                updateTicket({
+                  status_id: e.target.value,
+                });
               }}
             >
               <option value="1">Open</option>
@@ -361,7 +367,9 @@ function TicketDetails() {
               value={priorityId}
               onChange={(e) => {
                 setPriorityId(e.target.value);
-                updateTicket({ priority_id: e.target.value });
+                updateTicket({
+                  priority_id: e.target.value,
+                });
               }}
             >
               <option value="1">Low</option>
@@ -376,7 +384,9 @@ function TicketDetails() {
               value={categoryId}
               onChange={(e) => {
                 setCategoryId(e.target.value);
-                updateTicket({ category_id: e.target.value });
+                updateTicket({
+                  category_id: e.target.value,
+                });
               }}
             >
               <option value="1">Hardware</option>
@@ -401,7 +411,6 @@ function TicketDetails() {
                 </option>
               ))}
             </select>
-
           </div>
 
           <div className="td-card">
@@ -411,17 +420,14 @@ function TicketDetails() {
               {ticket.description || "No description provided."}
             </p>
           </div>
-
         </div>
 
         <div className="td-card">
-
           <div className="td-attachments-header">
             <h4>ATTACHMENTS ({attachments.length})</h4>
           </div>
 
           <div className="td-attachments-grid">
-
             {attachments.length === 0 && (
               <div className="td-attachment-placeholder">
                 <span>📎</span>
@@ -432,28 +438,27 @@ function TicketDetails() {
             {attachments.map((att) => (
               <a
                 key={att.id}
-                href={`http://localhost/InternShip/backend/${att.file_path}`}
+                href={`https://affectionate-freedom-production-e166.up.railway.app/${att.file_path}`}
                 target="_blank"
                 rel="noreferrer"
                 className="td-attachment-item"
               >
-                {att.file_type === "application/pdf" ? "📄" : "🖼️"}
+                {att.file_type === "application/pdf"
+                  ? "📄"
+                  : "🖼️"}
 
                 <span>
                   {att.file_path.split("/").pop()}
                 </span>
               </a>
             ))}
-
           </div>
         </div>
 
         <div className="td-card">
-
           <h4>COMMENTS</h4>
 
           <div className="td-comment-form">
-
             <textarea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
@@ -467,54 +472,49 @@ function TicketDetails() {
             >
               Add Comment
             </button>
-
           </div>
 
           <div className="td-comments-list">
-
             {comments.length === 0 && (
               <p className="td-meta">No comments yet.</p>
             )}
 
             {comments.map((c) => (
               <div key={c.id} className="td-comment">
-
                 <div className="td-avatar small">
                   {initials(c.commenter_name)}
                 </div>
 
                 <div>
-
                   <p className="td-requester-name">
                     {c.commenter_name}{" "}
                     <span className="td-meta">
-                      {new Date(c.created_at).toLocaleString()}
+                      {new Date(
+                        c.created_at
+                      ).toLocaleString()}
                     </span>
                   </p>
 
                   <p className="td-description">
                     {c.comment}
                   </p>
-
                 </div>
-
               </div>
             ))}
-
           </div>
-
         </div>
 
         {error && <p className="td-error">{error}</p>}
         {success && <p className="td-success">{success}</p>}
-
       </div>
 
       <footer className="td-footer">
-
         <div className="lp-footer-left">
           <span className="lp-footer-brand">
-            IT<span className="lp-footer-brand-accent">HelpDesk</span>
+            IT
+            <span className="lp-footer-brand-accent">
+              HelpDesk
+            </span>
           </span>
 
           <span className="lp-footer-copy">
@@ -528,7 +528,6 @@ function TicketDetails() {
           <a href="#">Help Center</a>
           <a href="#">Security</a>
         </div>
-
       </footer>
     </>
   );

@@ -33,7 +33,7 @@ const ResetPassword = () => {
 
     try {
       const response = await fetch(
-        "/backend/reset_password.php",
+        "https://affectionate-freedom-production-e166.up.railway.app/reset_password.php",
         {
           method: "POST",
           headers: {
@@ -56,7 +56,9 @@ const ResetPassword = () => {
       }
     } catch (err) {
       console.error(err);
-      setError(err.message || "Something went wrong. Please try again.");
+      setError(
+        err.message || "Something went wrong. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -72,12 +74,18 @@ const ResetPassword = () => {
             Enter your new password below to reset your account password.
           </p>
 
-          {message && <div className="success-msg">{message}</div>}
-          {error && <div className="error-msg">{error}</div>}
+          {message && (
+            <div className="success-msg">{message}</div>
+          )}
+
+          {error && (
+            <div className="error-msg">{error}</div>
+          )}
 
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>New Password</label>
+
               <input
                 type="password"
                 placeholder="Enter your new password"
@@ -89,11 +97,14 @@ const ResetPassword = () => {
 
             <div className="form-group">
               <label>Confirm Password</label>
+
               <input
                 type="password"
                 placeholder="Confirm your password"
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) =>
+                  setConfirmPassword(e.target.value)
+                }
                 required
               />
             </div>
